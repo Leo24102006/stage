@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Stages info 59/62</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #1b1f24; --muted: #5d6673; --line: #e1e4e8;
+    --accent: #2457d6; --accent-soft: #e8eefc;
+    --ok: #1a7f37; --ok-soft: #e3f4e8; --warn: #9a6700; --warn-soft: #fff4d6;
+    --bad: #b42318; --bad-soft: #fde8e6; --neutral-soft: #eef0f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1216; --card: #171b21; --text: #e6e9ee; --muted: #9aa4b1; --line: #2a3038;
+      --accent: #7aa2ff; --accent-soft: #1c2740;
+      --ok: #5fd07c; --ok-soft: #14301d; --warn: #e3b341; --warn-soft: #33290f;
+      --bad: #ff8a80; --bad-soft: #3a1a18; --neutral-soft: #222831;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 4px; font-size: .9rem; }
+  .sources { color: var(--muted); font-size: .8rem; margin: 0 0 20px; }
+  .filters { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; display: grid; gap: 12px; margin-bottom: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+  .row > span.lbl { font-weight: 600; font-size: .85rem; min-width: 80px; }
+  input[type=search], select { font: inherit; padding: 8px 10px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--bg); color: var(--text); }
+  input[type=search] { flex: 1; min-width: 200px; }
+  label.chk { display: inline-flex; gap: 6px; align-items: center; font-size: .9rem; cursor: pointer; }
+  .count { color: var(--muted); font-size: .9rem; margin: 0 0 10px; }
+  .list { display: grid; gap: 10px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .card.done { opacity: .55; }
+  .card h2 { font-size: 1.05rem; margin: 0 0 2px; }
+  .card h2 a { color: var(--text); text-decoration: none; }
+  .card h2 a:hover { color: var(--accent); text-decoration: underline; }
+  .meta { color: var(--muted); font-size: .88rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .tag { font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: var(--neutral-soft); color: var(--muted); }
+  .tag.new { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .tag.compatible { background: var(--ok-soft); color: var(--ok); font-weight: 600; }
+  .tag.proche { background: var(--warn-soft); color: var(--warn); }
+  .tag.trop_longue, .tag.trop_courte { background: var(--bad-soft); color: var(--bad); }
+  .extrait { font-size: .88rem; color: var(--muted); margin: 0; display: -webkit-box;
+    -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .card.open .extrait { -webkit-line-clamp: unset; }
+  .duree-src { font-size: .78rem; color: var(--muted); font-style: italic; margin: 4px 0 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .btn { font: inherit; font-size: .85rem; padding: 6px 12px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text); text-decoration: none; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.on { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+  .empty { text-align: center; color: var(--muted); padding: 40px 16px; }
+  footer { color: var(--muted); font-size: .8rem; margin-top: 28px; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Stages informatique · Nord &amp; Pas-de-Calais</h1>
+  <p class="sub" id="maj">Chargement…</p>
+  <p class="sources" id="sources"></p>
+
+  <div class="filters">
+    <div class="row">
+      <input type="search" id="q" placeholder="Rechercher : titre, entreprise, ville, techno…" aria-label="Rechercher">
+      <select id="dep" aria-label="Département">
+        <option value="">59 + 62</option>
+        <option value="59">Nord (59)</option>
+        <option value="62">Pas-de-Calais (62)</option>
+      </select>
+    </div>
+    <div class="row" id="durees">
+      <span class="lbl">Durée</span>
+      <label class="chk"><input type="checkbox" value="compatible" checked> Compatible 14 sem.</label>
+      <label class="chk"><input type="checkbox" value="proche" checked> Proche</label>
+      <label class="chk"><input type="checkbox" value="non_precisee" checked> Non précisée</label>
+      <label class="chk"><input type="checkbox" value="trop_longue"> Trop longue</label>
+      <label class="chk"><input type="checkbox" value="trop_courte"> Trop courte</label>
+    </div>
+    <div class="row">
+      <span class="lbl">Afficher</span>
+      <label class="chk"><input type="checkbox" id="nouvelles"> Nouvelles seulement</label>
+      <label class="chk"><input type="checkbox" id="cacher" checked> Masquer postulées / ignorées</label>
+    </div>
+  </div>
+
+  <p class="count" id="count"></p>
+  <div class="list" id="list"></div>
+
+  <footer>
+    Offres récupérées chaque matin via l'API France Travail et via
+    <a href="https://www.adzuna.fr" rel="noopener" target="_blank">Adzuna</a>.
+    La durée est détectée automatiquement dans le texte de l'offre : vérifie toujours sur l'annonce.
+    Tes « Postulé » / « Ignorer » sont enregistrés uniquement dans ce navigateur.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var STORE_KEY = "stages5962-statuts";
+  var LIBELLES = {
+    compatible: "Durée compatible", proche: "Durée proche", non_precisee: "Durée non précisée",
+    trop_longue: "Trop longue", trop_courte: "Trop courte"
+  };
+  var offres = [];
+  var statuts = lireStatuts();
+
+  function lireStatuts() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { return {}; }
+  }
+  function ecrireStatuts() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(statuts)); } catch (e) { /* navigation privée */ }
+  }
+  function norm(s) {
+    return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  }
+  function el(tag, cls, texte) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (texte != null) e.textContent = texte;
+    return e;
+  }
+  function dateFr(iso) {
+    if (!iso) return "";
+    var d = new Date(iso.length === 10 ? iso + "T12:00:00" : iso);
+    return isNaN(d) ? "" : d.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
+  }
+  function lienSur(url) {
+    return /^https?:\/\//i.test(url || "") ? url : "#";
+  }
+
+  function carte(o) {
+    var c = el("article", "card" + (statuts[o.id] ? " done" : ""));
+    var h = el("h2");
+    var a = el("a", null, o.titre);
+    a.href = lienSur(o.url); a.target = "_blank"; a.rel = "noopener";
+    h.appendChild(a); c.appendChild(h);
+
+    var meta = [o.entreprise, o.lieu + (o.departement ? " (" + o.departement + ")" : "")];
+    if (o.date) meta.push("publiée le " + dateFr(o.date));
+    meta.push(o.source);
+    c.appendChild(el("div", "meta", meta.filter(Boolean).join(" · ")));
+
+    var tags = el("div", "tags");
+    if (o.nouvelle) tags.appendChild(el("span", "tag new", "Nouvelle"));
+    var cat = (o.duree && o.duree.categorie) || "non_precisee";
+    tags.appendChild(el("span", "tag " + cat, LIBELLES[cat] || cat));
+    (o.niveau || []).forEach(function (n) { tags.appendChild(el("span", "tag", n)); });
+    if (statuts[o.id] === "postule") tags.appendChild(el("span", "tag compatible", "Postulé"));
+    c.appendChild(tags);
+
+    if (o.extrait) c.appendChild(el("p", "extrait", o.extrait));
+    if (o.duree && o.duree.extrait) c.appendChild(el("p", "duree-src", "Durée repérée : « …" + o.duree.extrait + " »"));
+
+    var actions = el("div", "actions");
+    var voir = el("a", "btn primary", "Voir l'offre");
+    voir.href = lienSur(o.url); voir.target = "_blank"; voir.rel = "noopener";
+    actions.appendChild(voir);
+    if (o.extrait && o.extrait.length > 200) {
+      var plus = el("button", "btn", "Lire l'extrait");
+      plus.type = "button";
+      plus.addEventListener("click", function () {
+        c.classList.toggle("open");
+        plus.textContent = c.classList.contains("open") ? "Réduire" : "Lire l'extrait";
+      });
+      actions.appendChild(plus);
+    }
+    [["postule", "Postulé ✓"], ["ignore", "Ignorer"]].forEach(function (s) {
+      var b = el("button", "btn" + (statuts[o.id] === s[0] ? " on" : ""), s[1]);
+      b.type = "button";
+      b.setAttribute("aria-pressed", statuts[o.id] === s[0] ? "true" : "false");
+      b.addEventListener("click", function () {
+        if (statuts[o.id] === s[0]) delete statuts[o.id]; else statuts[o.id] = s[0];
+        ecrireStatuts(); afficher();
+      });
+      actions.appendChild(b);
+    });
+    c.appendChild(actions);
+    return c;
+  }
+
+  function afficher() {
+    var q = norm(document.getElementById("q").value).trim().split(/\s+/).filter(Boolean);
+    var dep = document.getElementById("dep").value;
+    var durees = Array.prototype.map.call(
+      document.querySelectorAll("#durees input:checked"), function (i) { return i.value; });
+    var nouvelles = document.getElementById("nouvelles").checked;
+    var cacher = document.getElementById("cacher").checked;
+
+    var res = offres.filter(function (o) {
+      if (dep && o.departement !== dep) return false;
+      if (durees.indexOf((o.duree && o.duree.categorie) || "non_precisee") < 0) return false;
+      if (nouvelles && !o.nouvelle) return false;
+      if (cacher && statuts[o.id]) return false;
+      if (q.length) {
+        var t = norm([o.titre, o.entreprise, o.lieu, o.extrait].join(" "));
+        for (var i = 0; i < q.length; i++) if (t.indexOf(q[i]) < 0) return false;
+      }
+      return true;
+    });
+
+    var list = document.getElementById("list");
+    list.textContent = "";
+    if (!res.length) {
+      list.appendChild(el("div", "empty", offres.length
+        ? "Aucune offre ne correspond à ces filtres."
+        : "Aucune offre pour l'instant. La liste se remplit après la première mise à jour automatique."));
+    } else {
+      var frag = document.createDocumentFragment();
+      res.forEach(function (o) { frag.appendChild(carte(o)); });
+      list.appendChild(frag);
+    }
+    var nbPostule = offres.filter(function (o) { return statuts[o.id] === "postule"; }).length;
+    document.getElementById("count").textContent =
+      res.length + " offre" + (res.length > 1 ? "s" : "") + " affichée" + (res.length > 1 ? "s" : "") +
+      " sur " + offres.length + " · " + nbPostule + " postulée" + (nbPostule > 1 ? "s" : "");
+  }
+
+  ["q", "dep", "nouvelles", "cacher"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", afficher);
+  });
+  document.querySelectorAll("#durees input").forEach(function (i) { i.addEventListener("change", afficher); });
+
+  fetch("offres.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      offres = Array.isArray(data.offres) ? data.offres : [];
+      var nb = offres.filter(function (o) { return o.nouvelle; }).length;
+      document.getElementById("maj").textContent = data.mis_a_jour
+        ? "Mis à jour le " + new Date(data.mis_a_jour).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" }) +
+          " · " + nb + " nouvelle" + (nb > 1 ? "s" : "") + " offre" + (nb > 1 ? "s" : "")
+        : "Pas encore mis à jour.";
+      var src = data.sources || {};
+      document.getElementById("sources").textContent = Object.keys(src).map(function (k) {
+        return k + " : " + src[k];
+      }).join(" · ");
+      afficher();
+    })
+    .catch(function () {
+      document.getElementById("maj").textContent = "Impossible de charger les offres (offres.json).";
+      afficher();
+    });
+})();
+</script>
+</body>
+</html>
