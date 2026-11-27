@@ -123,8 +123,11 @@ RE_INFO_TITRE = re.compile(
 RE_PAS_INFO_TITRE = re.compile(
     r"(marketing|commercial|commerciale|communication|vente|vendeu|comptab|ressources humaines|\brh\b|"
     r"juridique|achat|logistique|assistant\w* (de direction|administrati)|community manager|graphis|"
-    r"chef de rayon|caisse|serveu|cuisin)"
+    r"chef de rayon|caisse|serveu|cuisin|business develop\w*|venture|investissement|customer success|"
+    r"relation client|relationnel\w*|electronique de puissance|power electronics)"
 )
+# Version des règles de tri : si elle change, les offres gardées des jours précédents sont re-triées.
+VERSION_REGLES = 2
 RE_NIVEAU_BUT = re.compile(r"(\bBUT\b|\bDUT\b|\bIUT\b|[Bb]ac ?\+ ?[23]\b|[Ll]icence (pro|professionnelle|3|informatique)|[Bb]achelor)")
 RE_NIVEAU_HAUT = re.compile(r"\b(bac ?\+ ?[45]|master|m1|m2|ecole d.ingenieurs?|cycle ingenieur|eleve ingenieur|fin d.etudes)\b")
 
@@ -157,8 +160,10 @@ def analyser_duree(texte: str) -> dict:
             apres = t[m.end():m.end() + 25]
             if not RE_CONTEXTE_DUREE.search(avant):
                 continue
-            if re.match(r"\s*(d.experience|minimum d.experience|d.anciennete)", apres):
+            if re.match(r"\s*(d.experience|minimum d.experience|d.anciennete|de formation|d.integration|d.onboarding)", apres):
                 continue
+            if re.search(r"(commence\w* par|debute\w* par|premiers?|d.abord)\s*$", avant):
+                continue  # « le stage commencera par 2 mois de formation » n'est pas la durée totale
             if regex is RE_DUREE_PLAGE:
                 a, b, unite = m.group(1), m.group(2), m.group(3)
                 mini, maxi = _semaines(_nombre(a), unite), _semaines(_nombre(b), unite)
@@ -184,27 +189,27 @@ def analyser_duree(texte: str) -> dict:
     return {"categorie": "non_precisee", "extrait": ""}
 
 
-def est_stage(titre: str, description: str, contrat: str) -> bool:
-    nt, nd, nc = norm(titre), norm(description), norm(contrat)
-    if RE_STAGE.search(nt):
-        return True
-    if RE_ALTERNANCE.search(nt):
-        return False  # alternance uniquement
-    # « stage » seulement dans la description : on refuse les vrais contrats de travail
-    if any(x in nc for x in ("cdi", "cdd", "interim", "mission", "permanent", "contract", "saisonnier")):
-        return False
-    return bool(RE_STAGE.search(nd))
+def est_stage(titre: str, description: str = "", contrat: str = "") -> bool:
+    """Le mot « stage » (ou stagiaire, internship) doit être dans le TITRE.
+
+    Dans la description seule, c'est trop souvent un CDI qui mentionne un stage
+    passé, ou un extrait tronqué (Adzuna ne donne qu'un extrait).
+    """
+    return bool(RE_STAGE.search(norm(titre)))
 
 
 def est_informatique(titre: str, description: str, rome: str = "", categorie: str = "") -> bool:
     nt = norm(titre)
-    if RE_PAS_INFO_TITRE.search(nt) and not re.search(r"(develop|informati|logiciel|software|data|devops|cyber)", nt):
-        return False
+    if RE_PAS_INFO_TITRE.search(nt):
+        sans_business = re.sub(r"business develop\w*", "", nt)
+        if not re.search(r"(develop|informati|logiciel|software|data|devops|cyber)", sans_business):
+            return False
     if (rome or "").upper().startswith("M18"):  # ROME M18xx = métiers de l'informatique
         return True
     if RE_INFO_TITRE.search(nt):
         return True
-    if categorie == "it-jobs":
+    # Adzuna classe parfois à tort en « it-jobs » : on demande aussi un mot info dans le texte.
+    if categorie == "it-jobs" and RE_INFO_TITRE.search(norm(description)):
         return True
     return False
 
@@ -220,7 +225,9 @@ def niveau(texte: str) -> list[str]:
 
 
 def cle_doublon(titre: str, entreprise: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", norm(titre)) + "|" + re.sub(r"[^a-z0-9]", "", norm(entreprise))
+    """« Stage : Stage - Dév Java (F/H) | Sopra-Steria » = « Stage - Dév Java | Sopra Steria »."""
+    t = re.sub(r"\b(stages?|stagiaires?|internship|h ?/ ?f|f ?/ ?h)\b", " ", norm(titre))
+    return re.sub(r"[^a-z0-9]", "", t) + "|" + re.sub(r"[^a-z0-9]", "", norm(entreprise))
 
 
 # --------------------------------------------------------------------------
@@ -419,7 +426,12 @@ def main() -> int:
     anciennes = []
     if OUT.exists():
         try:
-            anciennes = json.loads(OUT.read_text(encoding="utf-8")).get("offres", [])
+            precedent = json.loads(OUT.read_text(encoding="utf-8"))
+            anciennes = precedent.get("offres", [])
+            if precedent.get("version_regles") != VERSION_REGLES:
+                # Règles de tri changées : on ne garde des anciennes offres que leur date
+                # de première apparition, pas les offres elles-mêmes.
+                anciennes = [dict(o, derniere_vue="") for o in anciennes]
         except (json.JSONDecodeError, OSError):
             anciennes = []
 
@@ -436,6 +448,7 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({
         "mis_a_jour": maintenant.isoformat(timespec="minutes"),
+        "version_regles": VERSION_REGLES,
         "sources": sources,
         "offres": offres,
     }, ensure_ascii=False, indent=1), encoding="utf-8")

@@ -178,3 +178,51 @@ class ErreursAuth(unittest.TestCase):
         import urllib.error
         e = urllib.error.HTTPError("u", 400, "Bad", {}, io.BytesIO(b'{"error":"invalid_scope","error_description":"x"}'))
         self.assertEqual(fetch._code_erreur(e), "invalid_scope")
+
+
+class CasReelsAdzuna(unittest.TestCase):
+    """Cas repérés lors du premier vrai passage (titres réels, tri attendu)."""
+
+    def garde(self, titre, description="", categorie="it-jobs"):
+        return fetch.est_stage(titre) and fetch.est_informatique(titre, description, "", categorie)
+
+    def test_rejets(self):
+        self.assertFalse(self.garde("Front End Power Electronics Engineer", "internship stage"))
+        self.assertFalse(self.garde("Développeur .Net H/F", "stage possible"))
+        self.assertFalse(self.garde("Stage : Stage Business Développement et études stratégiques F/H"))
+        self.assertFalse(self.garde("Stage - Venture Capital & Impact Investing Proparco- F/H", "data"))
+        self.assertFalse(self.garde("Stage 2027 Assistant Excellence Relationnelle, documentation et qualité", "web"))
+        # catégorie it-jobs mais aucun mot informatique nulle part
+        self.assertFalse(self.garde("Stage chargé de mission RSE", "accompagner les équipes"))
+
+    def test_gardes(self):
+        self.assertTrue(self.garde("Stage : Développeur .net/React (F/H) - stage"))
+        self.assertTrue(self.garde("Stage : Stage – Data Engineer (F/H) – Lille"))
+        self.assertTrue(self.garde("Ingénieure / Ingénieur Cybersécurité GRC - Stage H/F (Stage)"))
+        self.assertTrue(self.garde("Stage Business Analyst - Défense & Sécurité - Lille", "projet informatique"))
+
+    def test_doublons(self):
+        self.assertEqual(
+            fetch.cle_doublon("Stage : Stage - Développeur/se Java - Défense et Sécurité - Lille", "Sopra-Steria"),
+            fetch.cle_doublon("Stage - Développeur/se Java - Défense et Sécurité - Lille", "Sopra Steria"))
+        self.assertNotEqual(fetch.cle_doublon("Stage développeur web", "A"), fetch.cle_doublon("Stage développeur web", "B"))
+
+    def test_duree_debut_de_stage(self):
+        r = fetch.analyser_duree("Le stage commencera par 2 mois de formation interne.")
+        self.assertEqual(r["categorie"], "non_precisee")
+        self.assertEqual(fetch.analyser_duree("stage conventionné de 6 mois")["categorie"], "trop_longue")
+
+
+class VersionRegles(unittest.TestCase):
+    def test_changement_de_regles_retrie(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = Path(d) / "offres.json"
+            out.write_text(json.dumps({"version_regles": 1, "offres": [
+                {"id": "az-1", "source": "Adzuna", "titre": "Front End Power Electronics Engineer", "entreprise": "X",
+                 "premiere_vue": "2026-11-20", "derniere_vue": "2026-11-27"}]}), encoding="utf-8")
+            with mock.patch.dict(os.environ, {}, clear=True), mock.patch.object(fetch, "OUT", out), \
+                    mock.patch.object(fetch, "ROOT", Path(d)):
+                fetch.main()
+            data = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(data["offres"], [])
+            self.assertEqual(data["version_regles"], fetch.VERSION_REGLES)
