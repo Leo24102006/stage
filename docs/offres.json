@@ -1,5 +1,8 @@
 {
- "mis_a_jour": "",
- "sources": {},
+ "mis_a_jour": "2026-11-27T13:26+00:00",
+ "sources": {
+  "France Travail": "erreur d'authentification (HTTP 400) : vérifie les clés et l'abonnement à « Offres d'emploi v2 »",
+  "Adzuna": "non configurée (clés manquantes)"
+ },
  "offres": []
 }
