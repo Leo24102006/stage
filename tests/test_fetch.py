@@ -142,3 +142,39 @@ class Pipeline(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ErreursAuth(unittest.TestCase):
+    def _lancer(self, reponses):
+        appels = []
+
+        def faux(method, url, params=None, form=None, headers=None, timeout=30):
+            if "access_token" in url:
+                appels.append(form["scope"])
+                r = reponses.pop(0)
+                if isinstance(r, Exception):
+                    raise r
+                return 200, r
+            return 204, None
+        env = {"FT_CLIENT_ID": " id-test ", "FT_CLIENT_SECRET": "secret-test"}
+        with mock.patch.dict(os.environ, env), mock.patch.object(fetch, "http", faux), \
+                mock.patch.object(fetch.time, "sleep", lambda s: None):
+            offres, statut = fetch.fetch_france_travail()
+        return appels, statut
+
+    def test_scope_alternatif(self):
+        appels, statut = self._lancer([fetch.HttpError(400, "invalid_scope"), {"access_token": "t"}])
+        self.assertEqual(appels[1], "application_id-test api_offresdemploiv2 o2dsoffre")
+        self.assertIn("offres lues", statut)
+
+    def test_mauvaise_cle(self):
+        appels, statut = self._lancer([fetch.HttpError(400, "invalid_client")])
+        self.assertEqual(len(appels), 1)
+        self.assertIn("identifiant client ou clé secrète incorrects", statut)
+        self.assertNotIn("secret-test", statut)
+
+    def test_code_erreur_lu(self):
+        import io
+        import urllib.error
+        e = urllib.error.HTTPError("u", 400, "Bad", {}, io.BytesIO(b'{"error":"invalid_scope","error_description":"x"}'))
+        self.assertEqual(fetch._code_erreur(e), "invalid_scope")

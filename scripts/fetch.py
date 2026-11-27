@@ -49,9 +49,22 @@ USER_AGENT = "stages-59-62/1.0 (recherche de stage personnelle)"
 # --------------------------------------------------------------------------
 
 class HttpError(Exception):
-    def __init__(self, status: int):
-        super().__init__(f"HTTP {status}")
+    def __init__(self, status: int, code: str = ""):
+        super().__init__(f"HTTP {status}" + (f" {code}" if code else ""))
         self.status = status
+        self.code = code
+
+
+def _code_erreur(e: urllib.error.HTTPError) -> str:
+    """Code d'erreur court renvoyé par l'API (ex. invalid_client). Jamais de clé dedans."""
+    try:
+        data = json.loads(e.read() or b"{}")
+    except (ValueError, OSError):
+        return ""
+    if not isinstance(data, dict):
+        return ""
+    code = str(data.get("error") or data.get("codeErreur") or "")
+    return re.sub(r"[^A-Za-z0-9_.-]", "", code)[:40]
 
 
 def http(method: str, url: str, params: dict | None = None, form: dict | None = None,
@@ -72,7 +85,7 @@ def http(method: str, url: str, params: dict | None = None, form: dict | None = 
             if e.code == 429 and tentative < 2:  # trop de requêtes : on attend et on réessaie
                 time.sleep(int(e.headers.get("Retry-After", "5") or 5))
                 continue
-            raise HttpError(e.code) from None
+            raise HttpError(e.code, _code_erreur(e)) from None
         except urllib.error.URLError as e:
             if tentative < 2:
                 time.sleep(3)
@@ -218,15 +231,29 @@ def fetch_france_travail() -> tuple[list[dict], str]:
     cid, secret = os.environ.get("FT_CLIENT_ID"), os.environ.get("FT_CLIENT_SECRET")
     if not cid or not secret:
         return [], "non configurée (clés manquantes)"
-    try:
-        _, tok = http("POST", FT_TOKEN_URL, form={
-            "grant_type": "client_credentials",
-            "client_id": cid,
-            "client_secret": secret,
-            "scope": "api_offresdemploiv2 o2dsoffre",
-        }, headers={"Content-Type": "application/x-www-form-urlencoded"})
-    except HttpError as e:
-        return [], f"erreur d'authentification ({e}) : vérifie les clés et l'abonnement à « Offres d'emploi v2 »"
+    cid, secret = cid.strip(), secret.strip()  # espaces copiés par erreur
+    tok, erreur = None, None
+    # Deux formats de scope vus dans les clients officiels : on essaie l'un puis l'autre.
+    for scope in ("api_offresdemploiv2 o2dsoffre", f"application_{cid} api_offresdemploiv2 o2dsoffre"):
+        try:
+            _, tok = http("POST", FT_TOKEN_URL, form={
+                "grant_type": "client_credentials",
+                "client_id": cid,
+                "client_secret": secret,
+                "scope": scope,
+            }, headers={"Content-Type": "application/x-www-form-urlencoded"})
+            break
+        except HttpError as e:
+            erreur = e
+            if e.code == "invalid_client":
+                break  # identifiant ou clé faux : inutile d'essayer un autre scope
+    if not tok:
+        conseils = {
+            "invalid_client": "identifiant client ou clé secrète incorrects",
+            "invalid_scope": "l'application n'est pas abonnée à l'API « Offres d'emploi v2 »",
+        }
+        detail = conseils.get(erreur.code, "vérifie les clés et l'abonnement à « Offres d'emploi v2 »")
+        return [], f"erreur d'authentification ({erreur}) : {detail}"
     auth = {"Authorization": f"Bearer {tok['access_token']}"}
 
     brutes: dict[str, dict] = {}
