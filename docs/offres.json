@@ -1,8 +1,697 @@
 {
- "mis_a_jour": "2026-11-27T13:33+00:00",
+ "mis_a_jour": "2026-11-27T13:46+00:00",
  "sources": {
-  "France Travail": "erreur d'authentification (HTTP 400 invalid_client) : identifiant client ou clé secrète incorrects",
-  "Adzuna": "non configurée (clés manquantes)"
+  "France Travail": "non configurée (clés manquantes)",
+  "Adzuna": "217 offres lues"
  },
- "offres": []
+ "offres": [
+  {
+   "id": "az-5978991416",
+   "source": "Adzuna",
+   "titre": "Stage - Développeur/se Java - Défense et Sécurité - Lille",
+   "entreprise": "Forums Talents Handicap",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-26",
+   "url": "https://www.adzuna.fr/details/5978991416?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description du poste Votre futur environnement de travail : Le vertical Espace, Défense et Sécurité doit relever de nombreux défis : développer et maintenir un ensemble d'applications critiques pour le compte des Ministères afin d'assurer son efficacité opérationnelle tout en l'accompagnant dans sa démarche de transformation numérique. Notre équipe, dynamique et soudée dans une agence à taille humaine, œuvre dans un but commun : accompagner les Ministères dans la conception, la réalisation et l…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5978991141",
+   "source": "Adzuna",
+   "titre": "Stage Business Analyst - Défense & Sécurité - Lille",
+   "entreprise": "Forums Talents Handicap",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-26",
+   "url": "https://www.adzuna.fr/details/5978991141?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description du poste Le secteur Défense et Sécurité doit relever de nombreux défis : assurer l'efficacité opérationnelle de nos clients, concevoir et mettre à disposition des forces des solutions sécurisées et souveraines dans un contexte où l’excellence et l’innovation font le succès de nos projets année après année. Nous recherchons un(e) Business Analyst pour intégrer notre Agence SIOC (Système d’Informations des Opérations de Commandement) basée à Chartres-de-Bretagne. Celle-ci consacre ses…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5978991033",
+   "source": "Adzuna",
+   "titre": "Stage - Développeur/se .NET - Services financiers - Lille",
+   "entreprise": "Forums Talents Handicap",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-26",
+   "url": "https://www.adzuna.fr/details/5978991033?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description du poste Au sein de la verticale Services Financiers , vous intervenez pour des acteurs majeurs de la banque, de l'assurance et des services financiers sur des projets applicatifs à forts enjeux métier. Votre futur environnement de travail Intégré(e) à une équipe projet agile basée à Lille, vous participez au développement et à l'évolution d'applications stratégiques pour nos clients. Encadré(e) par un tuteur expérimenté, vous montez progressivement en compétences sur les technologi…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5978991080",
+   "source": "Adzuna",
+   "titre": "Stage Consultant.e SAP - SAP Excellence Center - Lille",
+   "entreprise": "Forums Talents Handicap",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-26",
+   "url": "https://www.adzuna.fr/details/5978991080?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description du poste Vous êtes rattaché(e) à notre Business Line SAP de Sopra Steria, basé à Villeneuve d'Ascq. Cette dernière accompagne dans la mise en oeuvre de leur SI nos clients Grands Comptes et locaux dans de nombreux secteurs d'activités : Retail, Industrie, logistique, Finance. Dès votre arrivée, vous êtes accompagné(e) dans la montée en compétences sur l'ERP grâce à une équipe experte de Consultants : domaines fonctionnels (finance, logistique, supply chain), ou techniques (ABAP) et …",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5979812935",
+   "source": "Adzuna",
+   "titre": "Stage - Business Analyst / Proxy Product Owner IT Risque Opérationnel H/F",
+   "entreprise": "BNP PARIBAS",
+   "lieu": "Montreuil",
+   "departement": "62",
+   "date": "2026-11-26",
+   "url": "https://www.adzuna.fr/details/5979812935?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Au quotidien ça donne quoi ? Vos missions Après avoir pris connaissance de l'organisation de l'IT du Groupe BNP Paribas, des applicatifs concernés et des particularités du périmètre, vous développerez une expertise IT en réalisant les activités suivantes : * Vous contribuerez aux phases de design et développement du produit, principalement sur les activités de spécifications et de recette : analyse du besoin, maquettage, rédaction de user stories, préparation et exécution des cas de tests. * Vo…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5978585023",
+   "source": "Adzuna",
+   "titre": "Développeuse / Développeur fullstack - Stage H/F (Stage)",
+   "entreprise": "CAPGEMINI FRANCE",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-25",
+   "url": "https://www.adzuna.fr/details/5978585023?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Chez Sogeti, la technologie coule dans nos veines. C'est cet intérêt pour la technologie qui nous guide au quotidien et qui est reflété dans notre slogan \" Made In Tech \". Grâce à notre passion commune pour la technologie, à notre culture entrepreneuriale et à l'importance que nous accordons à la formation continue, nous mettrons tout en oeuvre pour vous accompagner à libérer votre plein potentiel. Vos missions Durant votre stage, vous rejoignez nos équipes sur des projets clients ou internes e…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5978348531",
+   "source": "Adzuna",
+   "titre": "Stage - Développeur/se Java - Défense et Sécurité - Lille",
+   "entreprise": "Sopra Steria",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-25",
+   "url": "https://www.adzuna.fr/details/5978348531?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "En tant qu'organisateur de forums de recrutement, Talents Handicap accompagne de très nombreuses entreprises & organisations en France dans leurs recrutements de collaborateurs en situation de handicap. Participant actuellement à l'un de nos forums. L'entreprise Sopra Steria recherche actuellement des profils : Description du poste Votre futur environnement de travail : Le vertical Espace, Défense et Sécurité doit relever de nombreux défis : développer et maintenir un ensemble d'applications cr…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5978348055",
+   "source": "Adzuna",
+   "titre": "Stage - Développeur/se .NET - Services financiers - Lille",
+   "entreprise": "Sopra Steria",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-25",
+   "url": "https://www.adzuna.fr/details/5978348055?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "En tant qu'organisateur de forums de recrutement, Talents Handicap accompagne de très nombreuses entreprises & organisations en France dans leurs recrutements de collaborateurs en situation de handicap. Participant actuellement à l'un de nos forums. L'entreprise Sopra Steria recherche actuellement des profils : Description du poste Au sein de la verticale Services Financiers , vous intervenez pour des acteurs majeurs de la banque, de l'assurance et des services financiers sur des projets applic…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5977009774",
+   "source": "Adzuna",
+   "titre": "Stage : STAGE – Chargé de Customer Success & Adoption de Plateforme Data (F/H)",
+   "entreprise": "Castorama",
+   "lieu": "Seclin-Nord",
+   "departement": "59",
+   "date": "2026-11-24",
+   "url": "https://www.adzuna.fr/details/5977009774?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Tu recherches un stage conventionné de 6 mois à partir de janvier/février 2027 ? Rejoins l'équipe Retail Media & Data Monetization de Kingfisher et contribue au développement de CoreIQ, notre plateforme data dédiée à nos fournisseurs partenaires. Ce stage s'adresse à un profil Commerce / Marketing qui aime autant accompagner des clients que comprendre les chiffres, explorer les données et résoudre des problématiques business. Rattaché(e) à Maxime, notre Head of Data & Retail Media Programs, tu …",
+   "duree": {
+    "categorie": "trop_longue",
+    "extrait": "stage conventionne de 6 mois"
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5977009733",
+   "source": "Adzuna",
+   "titre": "Stage : Stage – Data Engineer (F/H) – Lille",
+   "entreprise": "Caisse d'Epargne",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-24",
+   "url": "https://www.adzuna.fr/details/5977009733?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description de l'entreprise BPCE Solutions informatiques, c’est un acteur IT de référence implanté au cœur des territoires. Ce sont près de 2 600 femmes et hommes au service des Banques Populaires, des Caisses d’Epargne et de plusieurs métiers spécialisés du Groupe BPCE, 2e acteur bancaire en France. Nous imaginons et développons des solutions IT innovantes pour faciliter le quotidien de nos utilisateurs. Chaque jour, ce sont près de 1 français sur 2 qui utilisent nos solutions ! Entreprise inc…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5975993747",
+   "source": "Adzuna",
+   "titre": "Ingénieure / Ingénieur Cybersécurité GRC - Stage H/F (Stage)",
+   "entreprise": "CAPGEMINI FRANCE",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-23",
+   "url": "https://www.adzuna.fr/details/5975993747?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Choisir Capgemini, c'est choisir une entreprise où vous serez en mesure de façonner votre carrière selon vos aspirations. Avec le soutien et l'inspiration d'une communauté d'experts dans le monde entier , vous pourrez réécrire votre futur . Rejoignez nous pour redéfinir les limites de ce qui est possible, contribuer à libérer la valeur de la technologie pour les plus grandes organisations et participer à la construction d'un monde plus durable et inclusif. Vos missions * Analyse des risques lié…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5975993746",
+   "source": "Adzuna",
+   "titre": "Ingénieure / Ingénieur Cloud Security - Stage H/F (Stage)",
+   "entreprise": "CAPGEMINI FRANCE",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-23",
+   "url": "https://www.adzuna.fr/details/5975993746?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Choisir Capgemini, c'est choisir une entreprise où vous serez en mesure de façonner votre carrière selon vos aspirations. Avec le soutien et l'inspiration d'une communauté d'experts dans le monde entier , vous pourrez réécrire votre futur . Rejoignez nous pour redéfinir les limites de ce qui est possible, contribuer à libérer la valeur de la technologie pour les plus grandes organisations et participer à la construction d'un monde plus durable et inclusif. Vos missions Accompagné(e) par des exp…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5974211995",
+   "source": "Adzuna",
+   "titre": "Ingénieure / Ingénieur IA & Automatisation H/F (Stage)",
+   "entreprise": "CAPGEMINI FRANCE",
+   "lieu": "Lille-Nord",
+   "departement": "59",
+   "date": "2026-11-21",
+   "url": "https://www.adzuna.fr/details/5974211995?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Choisir Capgemini, c'est choisir une entreprise où vous serez en mesure de façonner votre carrière selon vos aspirations. Avec le soutien et l'inspiration d'une communauté d'experts dans le monde entier , vous pourrez réécrire votre futur . Rejoignez nous pour redéfinir les limites de ce qui est possible, contribuer à libérer la valeur de la technologie pour les plus grandes organisations et participer à la construction d'un monde plus durable et inclusif * Identification des opportunités d'aut…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5973940828",
+   "source": "Adzuna",
+   "titre": "Stage : Stage - Développeur/se Java - Défense et Sécurité - Lille",
+   "entreprise": "Sopra-Steria",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-21",
+   "url": "https://www.adzuna.fr/details/5973940828?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description de l'entreprise Sopra Steria, acteur majeur de la Tech en Europe, avec 51 000 collaborateurs dans près de 30 pays, est reconnu pour ses activités de conseil, de services et solutions numériques. Il aide ses clients à mener leur transformation digitale et à obtenir des bénéfices concrets et durables. Le Groupe apporte une réponse globale aux enjeux de compétitivité des grandes entreprises et organisations, en combinant une connaissance approfondie des secteurs d’activité et des techn…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5973940108",
+   "source": "Adzuna",
+   "titre": "Stage : Développeur .net/React (F/H) - stage",
+   "entreprise": "AXA",
+   "lieu": "Roubaix-Ouest",
+   "departement": "59",
+   "date": "2026-11-21",
+   "url": "https://www.adzuna.fr/details/5973940108?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "VOTRE RÔLE ET VOS MISSIONS Dans le cadre de sa campagne de stage, AXA France recherche un Développeur .net/React (F/H) en stage. Vous rejoindrez une squad au sein du périmètre d' \"AXA Santé Collectives\" en tant que Software Engineer spécialisé dans les technologies .net/React. Vous intégrerez une équipe de 12 développeurs et serez accompagné par un tuteur expérimenté. Vous aurez l'opportunité de participer aux activités de la squad animée par une approche agile de delivery. Vous mettrez en œuvr…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5971875032",
+   "source": "Adzuna",
+   "titre": "STAGE - Ingénieur Data & IA (F/H)",
+   "entreprise": "Thales",
+   "lieu": "Lambersart",
+   "departement": "59",
+   "date": "2026-11-19",
+   "url": "https://www.adzuna.fr/details/5971875032?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Lieu : Lille, France Construisons ensemble un avenir de confiance Thales est un leader mondial des hautes technologies spécialisé dans trois secteurs d’activité : Défense & Sécurité, Aéronautique & Spatial, et Cyber & Digital. Il développe des produits et solutions qui contribuent à un monde plus sûr, plus respectueux de l’environnement et plus inclusif. Le Groupe investit près de 4,5 milliards d’euros par an en Recherche & Développement, notamment dans des domaines clés de l’innovation tels qu…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5971471470",
+   "source": "Adzuna",
+   "titre": "Stage : STAGE - Data Modeler Junior F/H - LILLE",
+   "entreprise": "Groupe BPCE",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-19",
+   "url": "https://www.adzuna.fr/details/5971471470?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description de l'entreprise BPCE Solutions informatiques, c’est un acteur IT de référence implanté au cœur des territoires. Ce sont près de 2 600 femmes et hommes au service des Banques Populaires, des Caisses d’Epargne et de plusieurs métiers spécialisés du Groupe BPCE, 2e acteur bancaire en France. Nous imaginons et développons des solutions IT innovantes pour faciliter le quotidien de nos utilisateurs. Chaque jour, ce sont près de 1 français sur 2 qui utilisent nos solutions ! Entreprise inc…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5970991787",
+   "source": "Adzuna",
+   "titre": "Développeur .Net H/F",
+   "entreprise": "HOUSE OF ABY",
+   "lieu": "Lille",
+   "departement": "59",
+   "date": "2026-11-19",
+   "url": "https://www.adzuna.fr/details/5970991787?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Votre profil - Issu(e) d'une formation Bac 5 en Ingénierie ou Master en informatique - Minimum 4 ans d'expérience professionnelle sur un poste similaire (hors stage / alternance) - Connaissances et expériences concrètes sur le développement d'application et technologie C#, .NET - Capacité à résoudre des problèmes de manière proactive et à travailler efficacement en équipe. - Dynamisme, autonomie et rigueur dans l'exécution des tâches.",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [
+    "Vise aussi Bac+4/5"
+   ],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5969977755",
+   "source": "Adzuna",
+   "titre": "Stage/alternance Chargé(e) d'accompagnement à l'adoption de l'IA",
+   "entreprise": "SADAPS BARDAHL CORPORATION S.A.",
+   "lieu": "Cysoing",
+   "departement": "59",
+   "date": "2026-11-18",
+   "url": "https://www.adzuna.fr/details/5969977755?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Bardahl a choisi Claude comme assistant IA de référence et a équipé ses collaborateurs. Une formation générale a déjà eu lieu. Il faut maintenant que chacun s'en serve vraiment, dans son travail de tous les jours. C'est votre mission : aider chaque collaborateur à gagner du temps, poste par poste. Vous l'amenez d'un usage ponctuel de l'IA (rédiger, résumer, reformuler) à un assistant qui prend en charge ses tâches récurrentes. Vous passez l'essentiel de votre temps avec les utilisateurs, à leur…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5968885487",
+   "source": "Adzuna",
+   "titre": "Stage : Développeur java (F/H) - stage",
+   "entreprise": "AXA",
+   "lieu": "Roubaix-Ouest",
+   "departement": "59",
+   "date": "2026-11-17",
+   "url": "https://www.adzuna.fr/details/5968885487?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "VOTRE RÔLE ET VOS MISSIONS Dans le cadre de sa campagne de stage, AXA France recherche un Développeur java (F/H) en stage. En tant que Software Engineer EIP, vous intégrerez une équipe qui travaille sur la gestion des services utiles pour notre CRM Saleforce, outil critique pour l’activité de nos agents. L’une des 4 valeurs fondamentales d’AXA est « Customer First ». Et en tant que Software Engineer, vous serez amené à participer à l’élaboration et à la construction d’un produit qui se veut erg…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5966436484",
+   "source": "Adzuna",
+   "titre": "STAGE - Ingénieur Deep Learning - Machines éléctriques (F/H)",
+   "entreprise": "DASSAULT SYSTEMES",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-15",
+   "url": "https://www.adzuna.fr/details/5966436484?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "SIMULIA Manatee est un logiciel de simulation et de contrôle du bruit d'origine magnétique des machines électriques. Il permet aux ingénieurs en génie électrique, en mécanique et en vibro-acoustique de collaborer efficacement et de concevoir des systèmes électriques silencieux en réduisant le coût de fabrication des prototypes. L'équipe est composée d'une quinzaine de personnes réparties entre responsabilités développement, scientifique et qualité. Au sein de l'équipe R&D de SIMULIA Manatee, vo…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5966437543",
+   "source": "Adzuna",
+   "titre": "Stage de programmation d'un outil de dépouillement des essais de validation usine F/H",
+   "entreprise": "Forums Talents Handicap",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-15",
+   "url": "https://www.adzuna.fr/details/5966437543?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Des essais de validation usine sont très régulièrement réalisés sur el site de Jeumont et nécessitent un dépouillement spécifique. Un programme, développé par IBEMG, existe mais il date de 2011, son contenu n'est pas connu (fonctionne comme une boîte noire) et des limites ont déjà été atteintes (notamment de capacité d'utilisation). le stage consistera à sortir du mode \"boîte noire\" et notamment: - à reprendre le programme Python de traitement des enregistrements d'essais - à comprendre précisé…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5966103003",
+   "source": "Adzuna",
+   "titre": "Front End Power Electronics Engineer",
+   "entreprise": "Amazon Web Services",
+   "lieu": "Lille",
+   "departement": "59",
+   "date": "2026-11-14",
+   "url": "https://www.adzuna.fr/details/5966103003?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Amazon Web Services is seeking a Front End Power Electronics Engineer to design the medium-voltage AC/DC front-end stage of the SST, including active-front-end rectification, PFC/THD performance and high-voltage SiC power devices. AWS Infrastructure Services owns the design, planning, delivery, and operation of all AWS global infrastructure. In other words, we’re the people who keep the cloud running. We support all AWS data centers and all of the servers, storage, networking, power, and coolin…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5965600507",
+   "source": "Adzuna",
+   "titre": "Stage : Développeur full stack (F/H) - stage",
+   "entreprise": "AXA",
+   "lieu": "Roubaix-Ouest",
+   "departement": "59",
+   "date": "2026-11-14",
+   "url": "https://www.adzuna.fr/details/5965600507?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "VOTRE RÔLE ET VOS MISSIONS Dans le cadre de sa campagne de stage, AXA France recherche un Développeur full stack (F/H) en stage. Vous rejoindrez une squad au sein du périmètre d' \"AXA Santé Collectives\" en tant que Software Engineer spécialisé dans les technologies .Net/React. Vous intégrerez une équipe de 12 développeurs et vous serez accompagné par un tuteur expérimenté. Nous mettons un point d'honneur à offrir un encadrement de qualité, afin de vous permettre de vous développer professionnel…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5965383168",
+   "source": "Adzuna",
+   "titre": "Front End Power Electronics Engineer",
+   "entreprise": "Amazon",
+   "lieu": "Lille",
+   "departement": "59",
+   "date": "2026-11-14",
+   "url": "https://www.adzuna.fr/details/5965383168?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description Amazon Web Services is seeking a Front End Power Electronics Engineer to design the medium-voltage AC/DC front-end stage of the SST, including active-front-end rectification, PFC/THD performance and high-voltage SiC power devices. AWS Infrastructure Services owns the design, planning, delivery, and operation of all AWS global infrastructure. In other words, we're the people who keep the cloud running. We support all AWS data centers and all of the servers, storage, networking, power…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5964544636",
+   "source": "Adzuna",
+   "titre": "Stage de programmation d'un outil de dépouillement des essais de validation usine F/H",
+   "entreprise": "Framatome",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-11-13",
+   "url": "https://www.adzuna.fr/details/5964544636?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "En tant qu'organisateur de forums de recrutement, Talents Handicap accompagne de très nombreuses entreprises & organisations en France dans leurs recrutements de collaborateurs en situation de handicap. Participant actuellement à l'un de nos forums. L'entreprise Framatome recherche actuellement des profils : Des essais de validation usine sont très régulièrement réalisés sur el site de Jeumont et nécessitent un dépouillement spécifique. Un programme, développé par IBEMG, existe mais il date de …",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5964202528",
+   "source": "Adzuna",
+   "titre": "Front End Power Electronics Engineer",
+   "entreprise": "Amazon Data Services France SAS",
+   "lieu": "Lille",
+   "departement": "59",
+   "date": "2026-11-13",
+   "url": "https://www.adzuna.fr/details/5964202528?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Amazon Web Services is seeking a Front End Power Electronics Engineer to design the medium-voltage AC/DC front-end stage of the SST, including active-front-end rectification, PFC/THD performance and high-voltage SiC power devices. AWS Infrastructure Services owns the design, planning, delivery, and operation of all AWS global infrastructure. In other words, we’re the people who keep the cloud running. We support all AWS data centers and all of the servers, storage, networking, power, and coolin…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5963464313",
+   "source": "Adzuna",
+   "titre": "Stage - Venture Capital & Impact Investing Proparco- F/H",
+   "entreprise": "Agence Française de Développement",
+   "lieu": "Lille",
+   "departement": "59",
+   "date": "2026-11-12",
+   "url": "https://www.adzuna.fr/details/5963464313?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "STAGE - VENTURE CAPITAL & IMPACT INVESTING PROPARCO- F/H Quel sera votre rôle ? Le département Investissements de PROPARCO intervient sur des opérations de haut de bilan, en prise de participations directes ou indirectes (fonds d’investissements). Au sein de ce département, l'équipe Institutions Financières et Capital Risques recherche un(e) stagiaire Analyste pour son activité d'investissements en Venture Capital, pour une période de 6 mois, à pourvoir à partir de janvier 2027 . Cette équipe e…",
+   "duree": {
+    "categorie": "trop_longue",
+    "extrait": "pour une periode de 6 mois"
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5961482944",
+   "source": "Adzuna",
+   "titre": "Stage : Stage Business Développement et études stratégiques F/H",
+   "entreprise": "Orange",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-11",
+   "url": "https://www.adzuna.fr/details/5961482944?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Date de publication : Nov 09, 2026, 3:07PM Durée du contrat : 6 mois Envie de comprendre comment se construit le business de demain dans un secteur en pleine transformation ? Intégrez une équipe au cœur des enjeux stratégiques et de l’innovation numérique et contribuez à identifier concrètement les opportunités qui façonneront le développement de nos activités de demain. Missions Vous contribuez à identifier les opportunités de développement et à éclairer les décisions stratégiques sur le terri…",
+   "duree": {
+    "categorie": "trop_longue",
+    "extrait": "duree du contrat : 6 mois"
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5961482786",
+   "source": "Adzuna",
+   "titre": "Stage : STAGE - Développeur Solutions Technologiques du SI (F/H) - LILLE",
+   "entreprise": "Groupe BPCE",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-11",
+   "url": "https://www.adzuna.fr/details/5961482786?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description de l'entreprise \"BPCE Solutions informatiques, c’est un acteur IT de référence implanté au cœur des territoires. Ce sont près de 2 600 femmes et hommes au service des Banques Populaires, des Caisses d’Epargne et de plusieurs métiers spécialisés du Groupe BPCE, 2e acteur bancaire en France. Nous imaginons et développons des solutions IT innovantes pour faciliter le quotidien de nos utilisateurs. Chaque jour, ce sont près de 1 français sur 2 qui utilisent nos solutions ! Entreprise in…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5957700928",
+   "source": "Adzuna",
+   "titre": "Stage Ingénieur Cybersecurité et IA F/H",
+   "entreprise": "VINCI",
+   "lieu": "Arras",
+   "departement": "62",
+   "date": "2026-11-08",
+   "url": "https://www.adzuna.fr/details/5957700928?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Votre mission Intégré(e) à nos équipes Cyber, vous travaillerez au contact des experts techniques et des métiers pour identifier des besoins concrets et les transformer en solutions. Vous serez notamment amené(e) à : comprendre et formaliser les besoins des équipes internes et de nos clients ; analyser les usages et identifier les tâches pouvant être automatisées ou augmentées par l'IA ; réaliser un benchmark des solutions IA du marché et sélectionner les technologies les plus pertinentes en fo…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5955054780",
+   "source": "Adzuna",
+   "titre": "Développeur Java (F/H) - Stage M1/ 4ème année cycle ingénieur - CDI",
+   "entreprise": "Collective.work",
+   "lieu": "La-Madeleine",
+   "departement": "59",
+   "date": "2026-11-06",
+   "url": "https://www.adzuna.fr/details/5955054780?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description du poste Tu es actuellement en Master 1 ou en 2e année de cycle ingénieur en informatique et tu recherches un stage ? Tu souhaites mettre en pratique tes connaissances, découvrir le quotidien d'un développeur et progresser au contact d'une équipe expérimentée ? Tu es au bon endroit pour rejoindre Nextoo ! Chez Nextoo , nous accueillons régulièrement des étudiants dans le cadre de leur cursus et nous avons à cœur de les accompagner dans leurs premiers pas dans le monde professionnel…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [
+    "Vise aussi Bac+4/5"
+   ],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5953188206",
+   "source": "Adzuna",
+   "titre": "Stage 2027 Assistant Excellence Relationnelle, documentation et qualité IA H/F",
+   "entreprise": "Crédit Agricole Personal Finance & Mobility",
+   "lieu": "Roubaix",
+   "departement": "59",
+   "date": "2026-11-04",
+   "url": "https://www.adzuna.fr/details/5953188206?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Qui sommes nous ? Crédit Agricole Personal Finance & Mobility, filiale à 100 % du Groupe Crédit Agricole, est un leader du financement personnel et un acteur majeur de la mobilité durable en Europe. Présent dans 22 pays, le groupe accompagne chaque jour les particuliers dans la réalisation de leurs projets grâce à une large gamme de solutions de financement, de paiement, d’assurance et de mobilité. À travers ses activités il contribue également à la transition énergétique dans les domaines de …",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5947703689",
+   "source": "Adzuna",
+   "titre": "Stage Data Engineer / IA (H/F)",
+   "entreprise": "Ippon Technologies",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-10-31",
+   "url": "https://www.adzuna.fr/details/5947703689?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Ton stage ➡️ Le stage commencera par 2 mois de formation, afin de te familiariser avec notre environnement technique et nos outils : GCP, BigQuery, DBT, Databricks, Python, Airflow, Elementary, etc. ➡️ Tu passeras ensuite 4 mois en mise en pratique, sur des projets clients ou internes. Tu pourras notamment travailler sur l'industrialisation de plateformes Data, l'optimisation de processus ELT, la mise en place de solutions autour du Data Mesh ou encore la création de plateformes de Machine Lear…",
+   "duree": {
+    "categorie": "trop_courte",
+    "extrait": "le stage commencera par 2 mois"
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5947703722",
+   "source": "Adzuna",
+   "titre": "Stage Software Engineer (H/F)",
+   "entreprise": "Ippon Technologies",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-10-31",
+   "url": "https://www.adzuna.fr/details/5947703722?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "➡️ Le stage commencera par 2 mois de formation, afin de te familiariser avec notre environnement technique et nos pratiques : Java/Kotlin, Spring Boot, framework front (Angular, React ou Vue), tests automatisés, clean code, TDD/BDD. ➡️ Tu passeras ensuite 4 mois en mise en pratique, sur des projets clients ou internes. Tu pourras notamment développer des fonctionnalités front et back, écrire et maintenir des tests unitaires et d'intégration, participer à des revues de code et contribuer aux cho…",
+   "duree": {
+    "categorie": "trop_courte",
+    "extrait": "le stage commencera par 2 mois"
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5937413204",
+   "source": "Adzuna",
+   "titre": "Stage - ia et télédétection : Étude de l'apport des embeddings pour l'analyse et l'exploitation des données d'observation de la terre - h/f",
+   "entreprise": "CLS",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-10-22",
+   "url": "https://www.adzuna.fr/details/5937413204?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Description entreprise : CLS, filiale du CNES et de la CNP, est une société à mission internationale, pionnière dans la fourniture de solutions d'observation et de surveillance de la Terre depuis 1986. Sa vision est d'imaginer et de déployer des solutions innovantes pour comprendre, protéger notre Planète et gérer durablement ses ressources. Opérateur historique des balises Argos, CLS, avec plus de 1200 collaborateurs dans le monde, sur près de 41 sites dans 20 pays et un chiffre d’affaires ann…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  }
+ ]
 }
