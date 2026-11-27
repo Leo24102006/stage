@@ -1,9 +1,9 @@
 {
- "mis_a_jour": "2026-11-27T13:48+00:00",
+ "mis_a_jour": "2026-11-27T13:59+00:00",
  "version_regles": 2,
  "sources": {
-  "France Travail": "non configurée (clés manquantes)",
-  "Adzuna": "217 offres lues"
+  "Adzuna": "735 offres lues, 3 requête(s) en erreur",
+  "Jooble": "non configurée (clé manquante)"
  },
  "offres": [
   {
@@ -159,6 +159,25 @@
    "nouvelle": true
   },
   {
+   "id": "az-5978207165",
+   "source": "Adzuna",
+   "titre": "Stage : Ingénieur(e) Agroalimentaire – Transparence de l'offre et développement responsable des produits à marque propre en stage F/H",
+   "entreprise": "Auchan",
+   "lieu": "Villeneuve-d'Ascq",
+   "departement": "59",
+   "date": "2026-11-25",
+   "url": "https://www.adzuna.fr/details/5978207165?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Nous sommes… Auchan Retail France, une entreprise de distribution de plus de 50 000 collaborateurs au service de millions de clients chaque année. Ce que nous voulons, c'est aider nos clients à bien manger et vivre mieux, tout en préservant la planète. Que l'on soit en entrepôt, en magasin ou sur des fonctions support, notre point commun à tous, c'est de faire en sorte que nos clients aient plaisir à faire leurs courses chez nous. Parce que nos collaborateurs sont aussi nos premiers clients, no…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
    "id": "az-5977009774",
    "source": "Adzuna",
    "titre": "Stage : STAGE – Chargé de Customer Success & Adoption de Plateforme Data (F/H)",
@@ -187,6 +206,25 @@
    "date": "2026-11-24",
    "url": "https://www.adzuna.fr/details/5977009733?utm_medium=api&utm_source=7ff1560c",
    "extrait": "Description de l'entreprise BPCE Solutions informatiques, c’est un acteur IT de référence implanté au cœur des territoires. Ce sont près de 2 600 femmes et hommes au service des Banques Populaires, des Caisses d’Epargne et de plusieurs métiers spécialisés du Groupe BPCE, 2e acteur bancaire en France. Nous imaginons et développons des solutions IT innovantes pour faciliter le quotidien de nos utilisateurs. Chaque jour, ce sont près de 1 français sur 2 qui utilisent nos solutions ! Entreprise inc…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5976987885",
+   "source": "Adzuna",
+   "titre": "Stage Assistant Développement Commercial et Evènementiel H/F",
+   "entreprise": "CESI",
+   "lieu": "Pas-de-Calais",
+   "departement": "62",
+   "date": "2026-11-24",
+   "url": "https://www.adzuna.fr/details/5976987885?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Au sein de l'équipe commerciale du CESI Arras, vous participerez au développement des relations avec les entreprises partenaires et à la mise en œuvre de nos actions commerciales. Accompagné(e) par la manager et l’équipe, vous interviendrez sur plusieurs projets concrets, avec une dominante événementielle et commerciale. Vos missions Organisation et suivi du Job Dating – Avril 2027 Participer à la préparation et à l'organisation de l'événement. Contribuer à l'identification et à la mobilisation…",
    "duree": {
     "categorie": "non_precisee",
     "extrait": ""
@@ -531,6 +569,44 @@
    "date": "2026-10-22",
    "url": "https://www.adzuna.fr/details/5937413204?utm_medium=api&utm_source=7ff1560c",
    "extrait": "Description entreprise : CLS, filiale du CNES et de la CNP, est une société à mission internationale, pionnière dans la fourniture de solutions d'observation et de surveillance de la Terre depuis 1986. Sa vision est d'imaginer et de déployer des solutions innovantes pour comprendre, protéger notre Planète et gérer durablement ses ressources. Opérateur historique des balises Argos, CLS, avec plus de 1200 collaborateurs dans le monde, sur près de 41 sites dans 20 pays et un chiffre d’affaires ann…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5895068425",
+   "source": "Adzuna",
+   "titre": "Stage Data Engineer / IA (H/F) – Lille",
+   "entreprise": "IPPON Technologies",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-09-23",
+   "url": "https://www.adzuna.fr/details/5895068425?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "Ton stage ➡️ Le stage commencera par 2 mois de formation, afin de te familiariser avec notre environnement technique et nos outils : GCP, BigQuery, DBT, Databricks, Python, Airflow, Elementary, etc. ➡️ Tu passeras ensuite 4 mois en mise en pratique, sur des projets clients ou internes. Tu pourras notamment travailler sur l'industrialisation de plateformes Data, l'optimisation de processus ELT, la mise en place de solutions autour du Data Mesh ou encore la création de plateformes de Machine Lear…",
+   "duree": {
+    "categorie": "non_precisee",
+    "extrait": ""
+   },
+   "niveau": [],
+   "premiere_vue": "2026-11-27",
+   "derniere_vue": "2026-11-27",
+   "nouvelle": true
+  },
+  {
+   "id": "az-5895068424",
+   "source": "Adzuna",
+   "titre": "Stage Software Engineer (H/F) – Lille",
+   "entreprise": "IPPON Technologies",
+   "lieu": "Nord",
+   "departement": "59",
+   "date": "2026-09-23",
+   "url": "https://www.adzuna.fr/details/5895068424?utm_medium=api&utm_source=7ff1560c",
+   "extrait": "➡️ Le stage commencera par 2 mois de formation, afin de te familiariser avec notre environnement technique et nos pratiques : Java/Kotlin, Spring Boot, framework front (Angular, React ou Vue), tests automatisés, clean code, TDD/BDD. ➡️ Tu passeras ensuite 4 mois en mise en pratique, sur des projets clients ou internes. Tu pourras notamment développer des fonctionnalités front et back, écrire et maintenir des tests unitaires et d'intégration, participer à des revues de code et contribuer aux cho…",
    "duree": {
     "categorie": "non_precisee",
     "extrait": ""
