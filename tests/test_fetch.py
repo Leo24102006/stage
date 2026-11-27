@@ -226,3 +226,60 @@ class VersionRegles(unittest.TestCase):
             data = json.loads(out.read_text(encoding="utf-8"))
             self.assertEqual(data["offres"], [])
             self.assertEqual(data["version_regles"], fetch.VERSION_REGLES)
+
+
+class Lieux(unittest.TestCase):
+    def test_departement(self):
+        d = fetch.departement_depuis_lieu
+        self.assertEqual(d("Lille"), "59")
+        self.assertEqual(d("Villeneuve-d'Ascq"), "59")
+        self.assertEqual(d("Arras, Hauts-de-France"), "62")
+        self.assertEqual(d("Boulogne-sur-Mer"), "62")
+        self.assertEqual(d("Marcq-en-Barœul (59)"), "59")
+        self.assertEqual(d("62300 Lens"), "62")
+        self.assertEqual(d("Pas-de-Calais"), "62")
+        self.assertEqual(d("Nord"), "59")
+        self.assertEqual(d("Paris"), "")
+        self.assertEqual(d("Amiens"), "")
+        self.assertEqual(d("Montreuil"), "")  # 62 ou 93 : on ne devine pas
+        self.assertEqual(d("Saint-Aubin"), "")  # existe dans le 59 ET le 62
+
+
+class Jooble(unittest.TestCase):
+    def test_lecture(self):
+        appels = []
+
+        def faux_post(url, corps):
+            appels.append(url)
+            if url.startswith("https://fr.jooble.org"):
+                b = json.loads(corps)
+                if b["keywords"] == "stage développeur" and b["location"] == "Lille" and b["page"] == 1:
+                    return {"totalCount": 2, "jobs": [
+                        {"id": 1, "title": "Stage <b>Développeur</b> PHP", "location": "Roubaix", "company": "Test SARL",
+                         "snippet": "Stage de 14 semaines", "link": "https://fr.jooble.org/desc/1", "updated": "2026-11-26T10:00:00.000"},
+                        {"id": 2, "title": "Stage développeur", "location": "Paris", "company": "Ailleurs",
+                         "snippet": "", "link": "https://fr.jooble.org/desc/2", "updated": "2026-11-26T10:00:00.000"},
+                    ]}
+                return {"totalCount": 0, "jobs": []}
+            raise fetch.HttpError(404)
+        with mock.patch.dict(os.environ, {"JOOBLE_KEY": "cle-test"}), \
+                mock.patch.object(fetch, "_post_json", faux_post), mock.patch.object(fetch.time, "sleep", lambda s: None):
+            offres, statut = fetch.fetch_jooble()
+        self.assertTrue(all(u.startswith("https://fr.jooble.org/api/") for u in appels))
+        self.assertLessEqual(len(appels), 70)  # quota gratuit : 100/jour
+        self.assertIn("2 offres lues", statut)
+        par_id = {o["id"]: o for o in offres}
+        self.assertEqual(par_id["jb-1"]["departement"], "59")
+        self.assertEqual(par_id["jb-1"]["titre"], "Stage Développeur PHP")
+        self.assertEqual(par_id["jb-2"]["departement"], "")
+        self.assertTrue(fetch.garder(par_id["jb-1"]))
+        self.assertFalse(fetch.garder(par_id["jb-2"]))
+
+    def test_cle_refusee(self):
+        def refus(url, corps):
+            raise fetch.HttpError(403)
+        with mock.patch.dict(os.environ, {"JOOBLE_KEY": "x"}), mock.patch.object(fetch, "_post_json", refus):
+            offres, statut = fetch.fetch_jooble()
+        self.assertEqual(offres, [])
+        self.assertIn("fr.jooble.org", statut)
+        self.assertNotIn("x/", statut)

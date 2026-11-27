@@ -5,249 +5,536 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Stages info 59/62</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f7f9; --card: #ffffff; --text: #1b1f24; --muted: #5d6673; --line: #e1e4e8;
-    --accent: #2457d6; --accent-soft: #e8eefc;
-    --ok: #1a7f37; --ok-soft: #e3f4e8; --warn: #9a6700; --warn-soft: #fff4d6;
-    --bad: #b42318; --bad-soft: #fde8e6; --neutral-soft: #eef0f3;
+    --papier: #f7f8f5;
+    --encre: #18202c;
+    --ardoise: #5d6676;
+    --trait: #dde3ea;
+    --seyes: #c9d6ea;
+    --seyes-fin: #e3e9f3;
+    --marge: #d4504c;
+    --fluo: #f3ee5a;
+    --vert: #23774a;
+    --orange: #a66a12;
+    --rouge: #b3261e;
+    --bouton: #18202c;
+    --bouton-texte: #f7f8f5;
+    --marge-largeur: 112px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f1216; --card: #171b21; --text: #e6e9ee; --muted: #9aa4b1; --line: #2a3038;
-      --accent: #7aa2ff; --accent-soft: #1c2740;
-      --ok: #5fd07c; --ok-soft: #14301d; --warn: #e3b341; --warn-soft: #33290f;
-      --bad: #ff8a80; --bad-soft: #3a1a18; --neutral-soft: #222831;
+      --papier: #121821;
+      --encre: #e6eaf0;
+      --ardoise: #9aa3b2;
+      --trait: #252e3b;
+      --seyes: #26344a;
+      --seyes-fin: #1b2433;
+      --marge: #b9524e;
+      --fluo: #d9d33c;
+      --vert: #5cc98a;
+      --orange: #e0a548;
+      --rouge: #ff8f86;
+      --bouton: #e6eaf0;
+      --bouton-texte: #121821;
     }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
-  h1 { font-size: 1.5rem; margin: 0 0 4px; }
-  .sub { color: var(--muted); margin: 0 0 4px; font-size: .9rem; }
-  .sources { color: var(--muted); font-size: .8rem; margin: 0 0 20px; }
-  .filters { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 14px; display: grid; gap: 12px; margin-bottom: 16px; }
-  .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
-  .row > span.lbl { font-weight: 600; font-size: .85rem; min-width: 80px; }
-  input[type=search], select { font: inherit; padding: 8px 10px; border: 1px solid var(--line);
-    border-radius: 8px; background: var(--bg); color: var(--text); }
-  input[type=search] { flex: 1; min-width: 200px; }
-  label.chk { display: inline-flex; gap: 6px; align-items: center; font-size: .9rem; cursor: pointer; }
-  .count { color: var(--muted); font-size: .9rem; margin: 0 0 10px; }
-  .list { display: grid; gap: 10px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .card.done { opacity: .55; }
-  .card h2 { font-size: 1.05rem; margin: 0 0 2px; }
-  .card h2 a { color: var(--text); text-decoration: none; }
-  .card h2 a:hover { color: var(--accent); text-decoration: underline; }
-  .meta { color: var(--muted); font-size: .88rem; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-  .tag { font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: var(--neutral-soft); color: var(--muted); }
-  .tag.new { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-  .tag.compatible { background: var(--ok-soft); color: var(--ok); font-weight: 600; }
-  .tag.proche { background: var(--warn-soft); color: var(--warn); }
-  .tag.trop_longue, .tag.trop_courte { background: var(--bad-soft); color: var(--bad); }
-  .extrait { font-size: .88rem; color: var(--muted); margin: 0; display: -webkit-box;
-    -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .card.open .extrait { -webkit-line-clamp: unset; }
-  .duree-src { font-size: .78rem; color: var(--muted); font-style: italic; margin: 4px 0 0; }
-  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .btn { font: inherit; font-size: .85rem; padding: 6px 12px; border-radius: 8px; cursor: pointer;
-    border: 1px solid var(--line); background: var(--bg); color: var(--text); text-decoration: none; }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .btn.on { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
-  .empty { text-align: center; color: var(--muted); padding: 40px 16px; }
-  footer { color: var(--muted); font-size: .8rem; margin-top: 28px; }
-  footer a { color: var(--accent); }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--papier); color: var(--encre);
+    font-family: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px; line-height: 1.5;
+    /* la marge rouge du cahier, sur toute la hauteur */
+    background-image: linear-gradient(var(--marge), var(--marge));
+    background-size: 2px 100%; background-repeat: no-repeat;
+    background-position: var(--marge-largeur) 0;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--encre); outline-offset: 2px; border-radius: 2px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .ligne { display: grid; grid-template-columns: var(--marge-largeur) minmax(0, 1fr); }
+  .ligne > .m { padding: 0 14px 0 16px; text-align: right; color: var(--ardoise); font-size: .82rem; }
+  .ligne > .c { padding: 0 24px 0 28px; max-width: 860px; }
+
+  /* En-tête : la feuille Seyès */
+  header.feuille {
+    padding: 40px 0 34px;
+    background-image:
+      repeating-linear-gradient(to bottom, transparent 0 31px, var(--seyes) 31px 32px),
+      repeating-linear-gradient(to bottom, transparent 0 7px, var(--seyes-fin) 7px 8px);
+    border-bottom: 1px solid var(--seyes);
+  }
+  header .m { padding-top: 10px; }
+  h1 {
+    margin: 0; font-weight: 800; letter-spacing: -0.025em;
+    font-size: clamp(2rem, 5.4vw, 3.6rem); line-height: 1.04; max-width: 17ch;
+  }
+  .resume { margin: 14px 0 0; font-size: 1.08rem; color: var(--encre); max-width: 52ch; }
+  .compteur { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+  .compteur .nb { font-variant-numeric: tabular-nums; font-size: 2.6rem; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+  .compteur .lib { color: var(--ardoise); font-size: .95rem; line-height: 1.3; }
+  .batons { display: block; height: 46px; width: auto; max-width: 100%; color: var(--encre); overflow: visible; }
+  .batons path { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+  .batons path.dessin { stroke-dasharray: 60; stroke-dashoffset: 60; animation: trait .45s ease-out forwards; }
+  @keyframes trait { to { stroke-dashoffset: 0; } }
+
+  /* Barre d'outils */
+  .outils { position: sticky; top: 0; z-index: 5; background: var(--papier); border-bottom: 1px solid var(--trait); padding: 14px 0 12px; }
+  .outils .c { display: grid; gap: 12px; }
+  .recherche { display: flex; flex-wrap: wrap; gap: 10px; }
+  input[type=search] {
+    flex: 1 1 260px; min-width: 0; font: inherit; color: var(--encre); background: transparent;
+    border: 0; border-bottom: 2px solid var(--encre); padding: 6px 2px; border-radius: 0;
+  }
+  input[type=search]::placeholder { color: var(--ardoise); }
+  input[type=search]:focus-visible { outline: none; border-bottom-color: var(--marge); }
+  .groupe { display: inline-flex; border: 1.5px solid var(--encre); border-radius: 4px; overflow: hidden; }
+  .groupe button {
+    font: inherit; font-size: .9rem; border: 0; background: transparent; color: var(--encre);
+    padding: 6px 12px; cursor: pointer; border-left: 1.5px solid var(--encre);
+  }
+  .groupe button:first-child { border-left: 0; }
+  .groupe button[aria-pressed="true"] { background: var(--encre); color: var(--papier); }
+  .onglets { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+  .onglets button {
+    font: inherit; font-weight: 600; background: none; border: 0; padding: 4px 0; cursor: pointer;
+    color: var(--ardoise); border-bottom: 3px solid transparent;
+  }
+  .onglets button[aria-selected="true"] { color: var(--encre); border-bottom-color: var(--marge); }
+  .onglets .n { font-weight: 400; margin-left: 4px; }
+  .filtres { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: .88rem; }
+  .filtres .titre { color: var(--ardoise); margin-right: 2px; }
+  .puce {
+    font: inherit; font-size: .85rem; cursor: pointer; color: var(--encre); background: transparent;
+    border: 1px solid var(--trait); border-radius: 999px; padding: 3px 11px 3px 9px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .puce[aria-pressed="true"] { border-color: var(--encre); background: color-mix(in srgb, var(--encre) 7%, transparent); }
+  .puce[data-v][aria-pressed="false"] { color: var(--ardoise); text-decoration: line-through; text-decoration-thickness: 1px; }
+  #nouvelles[aria-pressed="false"] { color: var(--ardoise); }
+  .carre { width: 9px; height: 9px; border-radius: 2px; background: var(--ardoise); flex: none; }
+  .d-compatible .carre { background: var(--vert); }
+  .d-proche .carre { background: var(--orange); }
+  .d-trop_longue .carre, .d-trop_courte .carre { background: var(--rouge); }
+  .d-non_precisee .carre { background: transparent; border: 1.5px solid var(--ardoise); }
+
+  /* Liste des offres */
+  .etat { padding: 14px 0 6px; color: var(--ardoise); font-size: .9rem; }
+  ol.offres { list-style: none; margin: 0; padding: 0; }
+  .offre { padding: 20px 0 22px; border-bottom: 1px solid var(--trait); }
+  .offre .m { padding-top: 3px; }
+  .offre .m .postule { display: block; color: var(--vert); font-weight: 600; margin-top: 4px; }
+  .offre h2 { margin: 0; font-size: 1.16rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.005em; }
+  .offre h2 a { text-decoration: none; }
+  .offre h2 a:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .offre.nouvelle h2 a {
+    background-image: linear-gradient(transparent 52%, var(--fluo) 52%, var(--fluo) 92%, transparent 92%);
+    -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 2px;
+  }
+  @media (prefers-color-scheme: dark) { .offre.nouvelle h2 a { color: #121821; background: var(--fluo); border-radius: 2px; } }
+  .qui { margin-top: 3px; color: var(--encre); }
+  .qui .ent { font-weight: 600; }
+  .qui .src { color: var(--ardoise); font-size: .85rem; margin-left: 8px; }
+  .reperes { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 9px 0 0; font-size: .86rem; }
+  .reperes span { display: inline-flex; align-items: center; gap: 6px; }
+  .reperes .niv { color: var(--ardoise); }
+  .extrait { margin: 10px 0 0; color: var(--ardoise); font-size: .93rem; max-width: 72ch;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .offre.ouverte .extrait { -webkit-line-clamp: unset; }
+  .preuve { margin: 6px 0 0; font-size: .82rem; color: var(--ardoise); font-style: italic; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 14px; align-items: center; }
+  .btn {
+    font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; text-decoration: none;
+    border: 1.5px solid var(--encre); border-radius: 4px; padding: 6px 14px; background: transparent; color: var(--encre);
+  }
+  .btn.plein { background: var(--bouton); color: var(--bouton-texte); }
+  .btn.discret { border-color: transparent; color: var(--ardoise); padding-left: 6px; padding-right: 6px; }
+  .btn.discret:hover { color: var(--encre); }
+  .btn[aria-pressed="true"] { border-color: var(--vert); color: var(--vert); }
+  .vide { padding: 48px 0; max-width: 48ch; }
+  .vide p { margin: 0 0 6px; }
+  .vide p:first-child { font-weight: 700; font-size: 1.1rem; }
+
+  footer { padding: 36px 0 60px; color: var(--ardoise); font-size: .85rem; }
+  footer p { margin: 0 0 8px; max-width: 70ch; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 10;
+    background: var(--bouton); color: var(--bouton-texte); border-radius: 6px; padding: 10px 12px 10px 16px;
+    display: flex; gap: 14px; align-items: center; font-size: .92rem; max-width: calc(100vw - 32px);
+  }
+  .toast button { font: inherit; font-weight: 700; background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; }
+  .toast[hidden] { display: none; }
+
+  @media (max-width: 720px) {
+    :root { --marge-largeur: 14px; }
+    .ligne { grid-template-columns: minmax(0, 1fr); }
+    .ligne > .m { display: none; }
+    .ligne > .c { padding: 0 16px 0 30px; }
+    header.feuille { padding: 28px 0 26px; }
+    .outils { position: static; }
+    h1 { font-size: 2.1rem; }
+    .offre .date-mobile { display: block; color: var(--ardoise); font-size: .8rem; margin-bottom: 4px; }
+    .compteur .nb { font-size: 2.2rem; }
+  }
+  .date-mobile { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .batons path.dessin { animation: none; stroke-dashoffset: 0; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Stages informatique · Nord &amp; Pas-de-Calais</h1>
-  <p class="sub" id="maj">Chargement…</p>
-  <p class="sources" id="sources"></p>
 
-  <div class="filters">
-    <div class="row">
-      <input type="search" id="q" placeholder="Rechercher : titre, entreprise, ville, techno…" aria-label="Rechercher">
-      <select id="dep" aria-label="Département">
-        <option value="">59 + 62</option>
-        <option value="59">Nord (59)</option>
-        <option value="62">Pas-de-Calais (62)</option>
-      </select>
-    </div>
-    <div class="row" id="durees">
-      <span class="lbl">Durée</span>
-      <label class="chk"><input type="checkbox" value="compatible" checked> Compatible 14 sem.</label>
-      <label class="chk"><input type="checkbox" value="proche" checked> Proche</label>
-      <label class="chk"><input type="checkbox" value="non_precisee" checked> Non précisée</label>
-      <label class="chk"><input type="checkbox" value="trop_longue"> Trop longue</label>
-      <label class="chk"><input type="checkbox" value="trop_courte"> Trop courte</label>
-    </div>
-    <div class="row">
-      <span class="lbl">Afficher</span>
-      <label class="chk"><input type="checkbox" id="nouvelles"> Nouvelles seulement</label>
-      <label class="chk"><input type="checkbox" id="cacher" checked> Masquer postulées / ignorées</label>
+<header class="feuille">
+  <div class="ligne">
+    <div class="m" id="date-maj"></div>
+    <div class="c">
+      <h1>Stages info dans le Nord et le Pas&#8209;de&#8209;Calais</h1>
+      <p class="resume" id="resume">Chargement des offres…</p>
+      <div class="compteur" aria-live="polite">
+        <span class="nb" id="nb-postule">0</span>
+        <svg class="batons" id="batons" aria-hidden="true"></svg>
+        <span class="lib" id="lib-postule">candidature notée</span>
+      </div>
     </div>
   </div>
+</header>
 
-  <p class="count" id="count"></p>
-  <div class="list" id="list"></div>
-
-  <footer>
-    Offres récupérées chaque matin via l'API France Travail et via
-    <a href="https://www.adzuna.fr" rel="noopener" target="_blank">Adzuna</a>.
-    La durée est détectée automatiquement dans le texte de l'offre : vérifie toujours sur l'annonce.
-    Tes « Postulé » / « Ignorer » sont enregistrés uniquement dans ce navigateur.
-  </footer>
+<div class="outils">
+  <div class="ligne">
+    <div class="m"></div>
+    <div class="c">
+      <div class="recherche">
+        <label class="sr" for="q">Rechercher dans les offres</label>
+        <input type="search" id="q" placeholder="Java, data, Roubaix, Capgemini…" autocomplete="off">
+        <div class="groupe" role="group" aria-label="Département" id="dep">
+          <button type="button" data-v="" aria-pressed="true">59 et 62</button>
+          <button type="button" data-v="59" aria-pressed="false">Nord</button>
+          <button type="button" data-v="62" aria-pressed="false">Pas-de-Calais</button>
+        </div>
+      </div>
+      <div class="onglets" role="tablist" aria-label="Statut" id="vues">
+        <button type="button" role="tab" data-v="a_traiter" aria-selected="true">À traiter<span class="n"></span></button>
+        <button type="button" role="tab" data-v="postule" aria-selected="false">Postulées<span class="n"></span></button>
+        <button type="button" role="tab" data-v="ignore" aria-selected="false">Ignorées<span class="n"></span></button>
+        <button type="button" role="tab" data-v="tout" aria-selected="false">Toutes<span class="n"></span></button>
+      </div>
+      <div class="filtres" id="durees">
+        <span class="titre">Durée</span>
+        <button type="button" class="puce d-compatible" data-v="compatible" aria-pressed="true"><span class="carre"></span>Compatible 14 sem.</button>
+        <button type="button" class="puce d-proche" data-v="proche" aria-pressed="true"><span class="carre"></span>Proche</button>
+        <button type="button" class="puce d-non_precisee" data-v="non_precisee" aria-pressed="true"><span class="carre"></span>Non précisée</button>
+        <button type="button" class="puce d-trop_longue" data-v="trop_longue" aria-pressed="false"><span class="carre"></span>Trop longue</button>
+        <button type="button" class="puce d-trop_courte" data-v="trop_courte" aria-pressed="false"><span class="carre"></span>Trop courte</button>
+        <button type="button" class="puce" id="nouvelles" aria-pressed="false">Nouvelles seulement</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<main>
+  <div class="ligne"><div class="m"></div><div class="c"><p class="etat" id="etat"></p></div></div>
+  <ol class="offres" id="liste"></ol>
+</main>
+
+<footer>
+  <div class="ligne">
+    <div class="m"></div>
+    <div class="c">
+      <p id="sources"></p>
+      <p>Les offres sont relevées chaque matin vers 7 h via <a href="https://www.adzuna.fr" rel="noopener" target="_blank">Adzuna</a> et <a href="https://fr.jooble.org" rel="noopener" target="_blank">Jooble</a>. La durée est lue automatiquement dans l'extrait de l'annonce, vérifie-la toujours sur l'annonce complète.</p>
+      <p>Tes candidatures et les offres ignorées sont enregistrées dans ce navigateur uniquement.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" hidden><span id="toast-texte"></span><button type="button" id="toast-annuler">Annuler</button></div>
 
 <script>
 (function () {
   "use strict";
-  var STORE_KEY = "stages5962-statuts";
+  var CLE_STATUTS = "stages5962-statuts";
+  var CLE_PREFS = "stages5962-prefs";
   var LIBELLES = {
     compatible: "Durée compatible", proche: "Durée proche", non_precisee: "Durée non précisée",
     trop_longue: "Trop longue", trop_courte: "Trop courte"
   };
   var offres = [];
-  var statuts = lireStatuts();
+  var statuts = lire(CLE_STATUTS, {});
+  var prefs = lire(CLE_PREFS, {});
+  var etat = {
+    vue: prefs.vue || "a_traiter",
+    dep: prefs.dep || "",
+    durees: prefs.durees || ["compatible", "proche", "non_precisee"],
+    nouvelles: false,
+    q: ""
+  };
+  var annulation = null, minuterie = null;
 
-  function lireStatuts() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { return {}; }
+  function lire(cle, defaut) {
+    try { var v = JSON.parse(localStorage.getItem(cle)); return v && typeof v === "object" ? v : defaut; }
+    catch (e) { return defaut; }
   }
-  function ecrireStatuts() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(statuts)); } catch (e) { /* navigation privée */ }
+  function ecrire(cle, val) { try { localStorage.setItem(cle, JSON.stringify(val)); } catch (e) {} }
+  function statut(id) {
+    var s = statuts[id];
+    if (!s) return null;
+    return typeof s === "string" ? { s: s, d: "" } : s; // ancien format
   }
-  function norm(s) {
-    return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-  }
-  function el(tag, cls, texte) {
+  function norm(s) { return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+  function el(tag, cls, txt) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
-    if (texte != null) e.textContent = texte;
+    if (txt != null) e.textContent = txt;
     return e;
   }
-  function dateFr(iso) {
+  function dateCourte(iso) {
     if (!iso) return "";
     var d = new Date(iso.length === 10 ? iso + "T12:00:00" : iso);
-    return isNaN(d) ? "" : d.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
+    return isNaN(d) ? "" : d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
   }
-  function lienSur(url) {
-    return /^https?:\/\//i.test(url || "") ? url : "#";
+  function aujourdhui() {
+    var d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    return d.toISOString().slice(0, 10);
+  }
+  function lienSur(url) { return /^https?:\/\//i.test(url || "") ? url : "#"; }
+  function pluriel(n, mot) { return n + " " + mot + (n > 1 ? "s" : ""); }
+
+  /* ---------- compteur en bâtons ---------- */
+  function nbPostule() {
+    return Object.keys(statuts).filter(function (k) { var s = statut(k); return s && s.s === "postule"; }).length;
+  }
+  function dessinerBatons(animerDernier) {
+    var n = nbPostule();
+    var svg = document.getElementById("batons");
+    var max = 40, vis = Math.min(n, max);
+    var groupes = Math.ceil(vis / 5), largeur = Math.max(groupes * 46, 10);
+    svg.setAttribute("viewBox", "0 0 " + largeur + " 46");
+    svg.setAttribute("width", largeur);
+    svg.textContent = "";
+    for (var i = 0; i < vis; i++) {
+      var g = Math.floor(i / 5), k = i % 5, x0 = g * 46 + 4, p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      var j = ((i * 37) % 7) - 3; // petit tremblé régulier, comme à la main
+      if (k < 4) {
+        var x = x0 + k * 8 + j * 0.3;
+        p.setAttribute("d", "M" + x + " " + (6 + j * 0.4) + " L" + (x + j * 0.35) + " " + (40 - j * 0.3));
+      } else {
+        p.setAttribute("d", "M" + (x0 - 4) + " 33 L" + (x0 + 30) + " 12");
+      }
+      if (animerDernier && i === vis - 1) p.setAttribute("class", "dessin");
+      svg.appendChild(p);
+    }
+    svg.style.display = n ? "" : "none";
+    document.getElementById("nb-postule").textContent = n;
+    document.getElementById("lib-postule").textContent =
+      n === 0 ? "candidature notée pour l'instant. Clique sur « J'ai postulé » après chaque envoi."
+              : (n > 1 ? "candidatures notées" : "candidature notée") + (n > max ? " (les " + max + " premières en bâtons)" : "");
   }
 
-  function carte(o) {
-    var c = el("article", "card" + (statuts[o.id] ? " done" : ""));
-    var h = el("h2");
-    var a = el("a", null, o.titre);
+  /* ---------- filtres ---------- */
+  function categorie(o) { return (o.duree && o.duree.categorie) || "non_precisee"; }
+  function passeFiltres(o) {
+    if (etat.dep && o.departement !== etat.dep) return false;
+    if (etat.durees.indexOf(categorie(o)) < 0) return false;
+    if (etat.nouvelles && !o.nouvelle) return false;
+    if (etat.q) {
+      var t = norm([o.titre, o.entreprise, o.lieu, o.extrait].join(" "));
+      var mots = norm(etat.q).split(/\s+/).filter(Boolean);
+      for (var i = 0; i < mots.length; i++) if (t.indexOf(mots[i]) < 0) return false;
+    }
+    return true;
+  }
+  function dansVue(o, vue) {
+    var s = statut(o.id);
+    if (vue === "a_traiter") return !s;
+    if (vue === "postule") return !!s && s.s === "postule";
+    if (vue === "ignore") return !!s && s.s === "ignore";
+    return true;
+  }
+
+  /* ---------- rendu ---------- */
+  function ligneOffre(o) {
+    var s = statut(o.id);
+    var li = el("li", "offre ligne" + (o.nouvelle ? " nouvelle" : ""));
+    var m = el("div", "m");
+    m.appendChild(el("span", null, dateCourte(o.date)));
+    if (s && s.s === "postule") m.appendChild(el("span", "postule", s.d ? "postulé le " + dateCourte(s.d) : "postulé"));
+    li.appendChild(m);
+
+    var c = el("div", "c");
+    var dm = el("span", "date-mobile", (o.date ? "Publiée le " + dateCourte(o.date) : "") +
+      (s && s.s === "postule" ? (o.date ? ", " : "") + "postulé" + (s.d ? " le " + dateCourte(s.d) : "") : ""));
+    c.appendChild(dm);
+    var h = el("h2"), a = el("a", null, o.titre);
     a.href = lienSur(o.url); a.target = "_blank"; a.rel = "noopener";
     h.appendChild(a); c.appendChild(h);
 
-    var meta = [o.entreprise, o.lieu + (o.departement ? " (" + o.departement + ")" : "")];
-    if (o.date) meta.push("publiée le " + dateFr(o.date));
-    meta.push(o.source);
-    c.appendChild(el("div", "meta", meta.filter(Boolean).join(" · ")));
+    var qui = el("div", "qui");
+    qui.appendChild(el("span", "ent", o.entreprise));
+    qui.appendChild(document.createTextNode(", " + o.lieu + (o.departement ? " (" + o.departement + ")" : "")));
+    qui.appendChild(el("span", "src", "via " + o.source));
+    c.appendChild(qui);
 
-    var tags = el("div", "tags");
-    if (o.nouvelle) tags.appendChild(el("span", "tag new", "Nouvelle"));
-    var cat = (o.duree && o.duree.categorie) || "non_precisee";
-    tags.appendChild(el("span", "tag " + cat, LIBELLES[cat] || cat));
-    (o.niveau || []).forEach(function (n) { tags.appendChild(el("span", "tag", n)); });
-    if (statuts[o.id] === "postule") tags.appendChild(el("span", "tag compatible", "Postulé"));
-    c.appendChild(tags);
+    var rep = el("div", "reperes");
+    var cat = categorie(o);
+    var sd = el("span", "d-" + cat); sd.appendChild(el("span", "carre")); sd.appendChild(document.createTextNode(LIBELLES[cat] || cat));
+    rep.appendChild(sd);
+    (o.niveau || []).forEach(function (n) { rep.appendChild(el("span", "niv", n)); });
+    if (o.nouvelle) rep.appendChild(el("span", "niv", "Nouvelle"));
+    c.appendChild(rep);
 
     if (o.extrait) c.appendChild(el("p", "extrait", o.extrait));
-    if (o.duree && o.duree.extrait) c.appendChild(el("p", "duree-src", "Durée repérée : « …" + o.duree.extrait + " »"));
+    if (o.duree && o.duree.extrait) c.appendChild(el("p", "preuve", "Durée lue dans l'annonce : « " + o.duree.extrait + " »"));
 
-    var actions = el("div", "actions");
-    var voir = el("a", "btn primary", "Voir l'offre");
+    var act = el("div", "actions");
+    var voir = el("a", "btn plein", "Voir l'annonce");
     voir.href = lienSur(o.url); voir.target = "_blank"; voir.rel = "noopener";
-    actions.appendChild(voir);
-    if (o.extrait && o.extrait.length > 200) {
-      var plus = el("button", "btn", "Lire l'extrait");
-      plus.type = "button";
+    act.appendChild(voir);
+    act.appendChild(bouton(o, "postule", s && s.s === "postule" ? "Postulé" : "J'ai postulé", "btn"));
+    act.appendChild(bouton(o, "ignore", s && s.s === "ignore" ? "Ignorée" : "Ignorer", "btn discret"));
+    if (o.extrait && o.extrait.length > 160) {
+      var plus = el("button", "btn discret", "Lire l'extrait");
+      plus.type = "button"; plus.setAttribute("aria-expanded", "false");
       plus.addEventListener("click", function () {
-        c.classList.toggle("open");
-        plus.textContent = c.classList.contains("open") ? "Réduire" : "Lire l'extrait";
+        var ouvert = li.classList.toggle("ouverte");
+        plus.textContent = ouvert ? "Réduire" : "Lire l'extrait";
+        plus.setAttribute("aria-expanded", ouvert ? "true" : "false");
       });
-      actions.appendChild(plus);
+      act.appendChild(plus);
     }
-    [["postule", "Postulé ✓"], ["ignore", "Ignorer"]].forEach(function (s) {
-      var b = el("button", "btn" + (statuts[o.id] === s[0] ? " on" : ""), s[1]);
-      b.type = "button";
-      b.setAttribute("aria-pressed", statuts[o.id] === s[0] ? "true" : "false");
-      b.addEventListener("click", function () {
-        if (statuts[o.id] === s[0]) delete statuts[o.id]; else statuts[o.id] = s[0];
-        ecrireStatuts(); afficher();
-      });
-      actions.appendChild(b);
-    });
-    c.appendChild(actions);
-    return c;
+    c.appendChild(act);
+    li.appendChild(c);
+    return li;
   }
+
+  function bouton(o, type, texte, cls) {
+    var s = statut(o.id), actif = !!s && s.s === type;
+    var b = el("button", cls, texte);
+    b.type = "button"; b.setAttribute("aria-pressed", actif ? "true" : "false");
+    b.addEventListener("click", function () {
+      var avant = statuts[o.id];
+      if (actif) delete statuts[o.id];
+      else statuts[o.id] = { s: type, d: aujourdhui() };
+      ecrire(CLE_STATUTS, statuts);
+      dessinerBatons(type === "postule" && !actif);
+      afficher();
+      if (!actif) {
+        notifier(type === "postule" ? "Candidature notée." : "Offre ignorée.", function () {
+          if (avant === undefined) delete statuts[o.id]; else statuts[o.id] = avant;
+          ecrire(CLE_STATUTS, statuts); dessinerBatons(false); afficher();
+        });
+      }
+    });
+    return b;
+  }
+
+  function notifier(texte, surAnnuler) {
+    var t = document.getElementById("toast");
+    document.getElementById("toast-texte").textContent = texte;
+    annulation = surAnnuler; t.hidden = false;
+    clearTimeout(minuterie);
+    minuterie = setTimeout(function () { t.hidden = true; annulation = null; }, 5000);
+  }
+  document.getElementById("toast-annuler").addEventListener("click", function () {
+    if (annulation) annulation();
+    annulation = null; document.getElementById("toast").hidden = true;
+  });
 
   function afficher() {
-    var q = norm(document.getElementById("q").value).trim().split(/\s+/).filter(Boolean);
-    var dep = document.getElementById("dep").value;
-    var durees = Array.prototype.map.call(
-      document.querySelectorAll("#durees input:checked"), function (i) { return i.value; });
-    var nouvelles = document.getElementById("nouvelles").checked;
-    var cacher = document.getElementById("cacher").checked;
-
-    var res = offres.filter(function (o) {
-      if (dep && o.departement !== dep) return false;
-      if (durees.indexOf((o.duree && o.duree.categorie) || "non_precisee") < 0) return false;
-      if (nouvelles && !o.nouvelle) return false;
-      if (cacher && statuts[o.id]) return false;
-      if (q.length) {
-        var t = norm([o.titre, o.entreprise, o.lieu, o.extrait].join(" "));
-        for (var i = 0; i < q.length; i++) if (t.indexOf(q[i]) < 0) return false;
-      }
-      return true;
+    var filtrees = offres.filter(passeFiltres);
+    document.querySelectorAll("#vues button").forEach(function (b) {
+      var v = b.getAttribute("data-v");
+      b.setAttribute("aria-selected", v === etat.vue ? "true" : "false");
+      b.querySelector(".n").textContent = filtrees.filter(function (o) { return dansVue(o, v); }).length;
     });
-
-    var list = document.getElementById("list");
-    list.textContent = "";
+    var res = filtrees.filter(function (o) { return dansVue(o, etat.vue); });
+    var liste = document.getElementById("liste");
+    liste.textContent = "";
     if (!res.length) {
-      list.appendChild(el("div", "empty", offres.length
-        ? "Aucune offre ne correspond à ces filtres."
-        : "Aucune offre pour l'instant. La liste se remplit après la première mise à jour automatique."));
+      var v = el("li", "ligne"), c = el("div", "c vide");
+      v.appendChild(el("div", "m"));
+      var p1, p2;
+      if (!offres.length) { p1 = "Aucune offre pour l'instant."; p2 = "La liste se remplit à la prochaine relève, chaque matin vers 7 h."; }
+      else if (etat.vue === "a_traiter" && !etat.q) { p1 = "Tout est traité."; p2 = "Les nouvelles offres arrivent chaque matin vers 7 h. Pense à regarder l'onglet « Toutes » ou à élargir les durées."; }
+      else { p1 = "Aucune offre ne correspond."; p2 = "Retire un mot de la recherche ou réactive des durées."; }
+      c.appendChild(el("p", null, p1)); c.appendChild(el("p", null, p2));
+      v.appendChild(c); liste.appendChild(v);
     } else {
       var frag = document.createDocumentFragment();
-      res.forEach(function (o) { frag.appendChild(carte(o)); });
-      list.appendChild(frag);
+      res.forEach(function (o) { frag.appendChild(ligneOffre(o)); });
+      liste.appendChild(frag);
     }
-    var nbPostule = offres.filter(function (o) { return statuts[o.id] === "postule"; }).length;
-    document.getElementById("count").textContent =
-      res.length + " offre" + (res.length > 1 ? "s" : "") + " affichée" + (res.length > 1 ? "s" : "") +
-      " sur " + offres.length + " · " + nbPostule + " postulée" + (nbPostule > 1 ? "s" : "");
+    var cachees = offres.length - filtrees.length;
+    document.getElementById("etat").textContent = pluriel(res.length, "offre") + " affichée" + (res.length > 1 ? "s" : "") +
+      (cachees ? ", " + cachees + " masquée" + (cachees > 1 ? "s" : "") + " par les filtres" : "") + ".";
+    ecrire(CLE_PREFS, { vue: etat.vue, dep: etat.dep, durees: etat.durees });
   }
 
-  ["q", "dep", "nouvelles", "cacher"].forEach(function (id) {
-    document.getElementById(id).addEventListener("input", afficher);
+  /* ---------- contrôles ---------- */
+  var minuterieQ;
+  document.getElementById("q").addEventListener("input", function (e) {
+    clearTimeout(minuterieQ);
+    minuterieQ = setTimeout(function () { etat.q = e.target.value.trim(); afficher(); }, 120);
   });
-  document.querySelectorAll("#durees input").forEach(function (i) { i.addEventListener("change", afficher); });
+  document.querySelectorAll("#dep button").forEach(function (b) {
+    b.setAttribute("aria-pressed", b.getAttribute("data-v") === etat.dep ? "true" : "false");
+    b.addEventListener("click", function () {
+      etat.dep = b.getAttribute("data-v");
+      document.querySelectorAll("#dep button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      afficher();
+    });
+  });
+  document.querySelectorAll("#vues button").forEach(function (b) {
+    b.addEventListener("click", function () { etat.vue = b.getAttribute("data-v"); afficher(); });
+  });
+  document.querySelectorAll("#durees .puce[data-v]").forEach(function (b) {
+    var v = b.getAttribute("data-v");
+    b.setAttribute("aria-pressed", etat.durees.indexOf(v) >= 0 ? "true" : "false");
+    b.addEventListener("click", function () {
+      var i = etat.durees.indexOf(v);
+      if (i >= 0) etat.durees.splice(i, 1); else etat.durees.push(v);
+      b.setAttribute("aria-pressed", i >= 0 ? "false" : "true");
+      afficher();
+    });
+  });
+  document.getElementById("nouvelles").addEventListener("click", function () {
+    etat.nouvelles = !etat.nouvelles;
+    this.setAttribute("aria-pressed", etat.nouvelles ? "true" : "false");
+    afficher();
+  });
 
+  /* ---------- chargement ---------- */
+  dessinerBatons(false);
   fetch("offres.json", { cache: "no-store" })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
       offres = Array.isArray(data.offres) ? data.offres : [];
       var nb = offres.filter(function (o) { return o.nouvelle; }).length;
-      document.getElementById("maj").textContent = data.mis_a_jour
-        ? "Mis à jour le " + new Date(data.mis_a_jour).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" }) +
-          " · " + nb + " nouvelle" + (nb > 1 ? "s" : "") + " offre" + (nb > 1 ? "s" : "")
-        : "Pas encore mis à jour.";
+      var aTraiter = offres.filter(function (o) { return !statut(o.id); }).length;
+      if (data.mis_a_jour) {
+        var d = new Date(data.mis_a_jour);
+        var dm = document.getElementById("date-maj"); dm.textContent = "";
+        dm.appendChild(el("span", null, "relevé le")); dm.appendChild(document.createElement("br"));
+        dm.appendChild(el("span", null, d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" })));
+        document.getElementById("resume").textContent =
+          pluriel(offres.length, "offre") + " en ligne, dont " + nb + " nouvelle" + (nb > 1 ? "s" : "") +
+          " et " + aTraiter + " à traiter. Relevé le " +
+          d.toLocaleString("fr-FR", { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" }) + ".";
+      } else {
+        document.getElementById("resume").textContent = "Pas encore de relevé.";
+      }
       var src = data.sources || {};
-      document.getElementById("sources").textContent = Object.keys(src).map(function (k) {
-        return k + " : " + src[k];
-      }).join(" · ");
+      var phrases = Object.keys(src).map(function (k) { return k + " : " + src[k]; });
+      document.getElementById("sources").textContent = phrases.length ? "Relevé du jour. " + phrases.join(". ") + "." : "";
       afficher();
     })
     .catch(function () {
-      document.getElementById("maj").textContent = "Impossible de charger les offres (offres.json).";
+      document.getElementById("resume").textContent = "Impossible de charger les offres. Recharge la page dans un instant.";
       afficher();
     });
 })();

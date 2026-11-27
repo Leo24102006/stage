@@ -40,6 +40,10 @@ FT_TOKEN_URL = "https://entreprise.francetravail.fr/connexion/oauth2/access_toke
 FT_SEARCH_URL = "https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search"
 FT_OFFRE_URL = "https://candidat.francetravail.fr/offres/recherche/detail/"
 ADZUNA_URL = "https://api.adzuna.com/v1/api/jobs/fr/search/{page}"
+# Clé Jooble à demander sur fr.jooble.org/api/about (une clé jooble.org ne voit que les USA).
+JOOBLE_HOTES = ("https://fr.jooble.org/api/", "https://jooble.org/api/")
+# Offres plus anciennes que ça : sans doute pourvues.
+MAX_JOURS = 90
 
 USER_AGENT = "stages-59-62/1.0 (recherche de stage personnelle)"
 
@@ -224,6 +228,43 @@ def niveau(texte: str) -> list[str]:
     return tags
 
 
+def _charger_communes() -> dict[str, str]:
+    data = json.loads((Path(__file__).with_name("communes_59_62.json")).read_text(encoding="utf-8"))
+    communes = {}
+    for dep in DEPARTEMENTS:
+        for nom in data[dep]:
+            communes[re.sub(r"[^a-z0-9]", "", norm(nom))] = dep
+    # Noms présents dans les deux départements : impossible de trancher.
+    for nom in set(data["59"]) & set(data["62"]):
+        communes.pop(re.sub(r"[^a-z0-9]", "", norm(nom)), None)
+    return communes
+
+
+COMMUNES = _charger_communes()
+# Noms qui existent aussi ailleurs en France et désignent presque toujours l'autre commune.
+COMMUNES_AMBIGUES = {"montreuil"}
+RE_HORS_ZONE = re.compile(r"(paris|ile.de.france|seine|hauts.de.seine|val.de.marne|yvelines|essonne|"
+                          r"somme|aisne|oise|lyon|marseille|bordeaux|nantes|toulouse|rennes|belgique|belgium)")
+
+
+def departement_depuis_lieu(lieu: str) -> str:
+    """« Lille », « Villeneuve-d'Ascq (59) », « Arras, Pas-de-Calais » -> « 59 » / « 62 » / « »."""
+    t = norm(lieu)
+    m = re.search(r"\b(59|62)\d{0,3}\b", t)
+    if m:
+        return m.group(1)
+    for code, nom in DEPARTEMENTS.items():
+        if re.search(r"\b" + re.escape(norm(nom)) + r"\b", t) and not (code == "59" and "pas-de-calais" in t):
+            return code
+    if RE_HORS_ZONE.search(t):
+        return ""
+    for morceau in re.split(r"[,;/()]| - ", t):
+        cle = re.sub(r"[^a-z0-9]", "", morceau)
+        if cle and cle not in COMMUNES_AMBIGUES and cle in COMMUNES:
+            return COMMUNES[cle]
+    return ""
+
+
 def cle_doublon(titre: str, entreprise: str) -> str:
     """« Stage : Stage - Dév Java (F/H) | Sopra-Steria » = « Stage - Dév Java | Sopra Steria »."""
     t = re.sub(r"\b(stages?|stagiaires?|internship|h ?/ ?f|f ?/ ?h)\b", " ", norm(titre))
@@ -309,10 +350,12 @@ def fetch_adzuna() -> tuple[list[dict], str]:
         return [], "non configurée (clés manquantes)"
     requetes = []
     for nom_dep in DEPARTEMENTS.values():
-        # 1) tous les stages classés « informatique » par Adzuna
+        # 1) TOUS les stages du département, triés ensuite par nos règles (rattrape les offres mal classées)
+        requetes.append(({"what": "stage", "where": nom_dep}, 10))
+        requetes.append(({"what": "stagiaire", "where": nom_dep}, 4))
+        requetes.append(({"what_or": "internship intern", "where": nom_dep}, 2))
+        # 2) stages classés « informatique » par Adzuna (au cas où le 1 serait coupé à 10 pages)
         requetes.append(({"what_or": "stage stagiaire internship", "category": "it-jobs", "where": nom_dep}, 5))
-        # 2) stages dont le titre parle d'info mais mal classés
-        requetes.append(({"what": "stage", "what_or": "développeur informatique web logiciel data", "where": nom_dep}, 3))
     brutes: dict[str, dict] = {}
     erreurs = 0
     for params, pages in requetes:
@@ -320,7 +363,7 @@ def fetch_adzuna() -> tuple[list[dict], str]:
             try:
                 _, data = http("GET", ADZUNA_URL.format(page=page), params={
                     "app_id": app_id, "app_key": app_key, "results_per_page": 50,
-                    "max_days_old": 60, "sort_by": "date", **params,
+                    "max_days_old": MAX_JOURS, "sort_by": "date", **params,
                 })
             except HttpError as e:
                 erreurs += 1
@@ -331,7 +374,7 @@ def fetch_adzuna() -> tuple[list[dict], str]:
             resultats = (data or {}).get("results", [])
             for o in resultats:
                 brutes[str(o.get("id"))] = o
-            time.sleep(1)
+            time.sleep(2.6)  # rester sous ~25 requêtes/minute
             if len(resultats) < 50:
                 break
 
@@ -342,8 +385,10 @@ def fetch_adzuna() -> tuple[list[dict], str]:
         affiche = loc.get("display_name") or ""
         dep = ""
         for code, nom in DEPARTEMENTS.items():
-            if nom in zones or norm(nom) in norm(affiche):
+            if nom in zones:
                 dep = code
+        if not dep and not zones:
+            dep = departement_depuis_lieu(affiche)
         offres.append({
             "id": "az-" + str(o.get("id")),
             "source": "Adzuna",
@@ -360,6 +405,84 @@ def fetch_adzuna() -> tuple[list[dict], str]:
         })
     statut = f"{len(brutes)} offres lues" + (f", {erreurs} requête(s) en erreur" if erreurs else "")
     return offres, statut
+
+
+def fetch_jooble() -> tuple[list[dict], str]:
+    cle = (os.environ.get("JOOBLE_KEY") or "").strip()
+    if not cle:
+        return [], "non configurée (clé manquante)"
+    # Offre gratuite : 100 requêtes/jour. Ce plan en fait au maximum ~61.
+    plan = []
+    for lieu in ("Nord", "Pas-de-Calais", "Lille"):
+        for mots in ("stage informatique", "stage développeur", "stage data", "stage cybersécurité",
+                     "stage réseau système"):
+            plan.append((mots, lieu, 3))
+    for lieu in ("Arras", "Lens", "Valenciennes", "Dunkerque", "Calais", "Douai", "Roubaix", "Villeneuve-d'Ascq"):
+        for mots in ("stage informatique", "stage développeur"):
+            plan.append((mots, lieu, 1))
+
+    hote = None
+    brutes: dict[str, dict] = {}
+    erreurs = 0
+    for mots, lieu, pages in plan:
+        for page in range(1, pages + 1):
+            corps = json.dumps({"keywords": mots, "location": lieu, "page": page, "ResultOnPage": 50}).encode()
+            data = None
+            for h in ([hote] if hote else JOOBLE_HOTES):
+                try:
+                    data = _post_json(h + urllib.parse.quote(cle), corps)
+                    hote = h
+                    break
+                except HttpError as e:
+                    if hote or h == JOOBLE_HOTES[-1]:
+                        erreurs += 1
+                        if e.status in (401, 403):
+                            return [], f"clé refusée ({e}) : vérifie qu'elle vient bien de fr.jooble.org"
+                        if e.status == 429:
+                            return _jooble_offres(brutes), f"{len(brutes)} offres lues (quota du jour atteint)"
+            if data is None:
+                break
+            jobs = data.get("jobs") or []
+            for o in jobs:
+                brutes[str(o.get("id") or o.get("link"))] = o
+            time.sleep(0.5)
+            if len(jobs) < 20:
+                break
+    statut = f"{len(brutes)} offres lues" + (f", {erreurs} requête(s) en erreur" if erreurs else "")
+    return _jooble_offres(brutes), statut
+
+
+def _post_json(url: str, corps: bytes) -> dict:
+    req = urllib.request.Request(url, data=corps, method="POST", headers={
+        "User-Agent": USER_AGENT, "Accept": "application/json", "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read() or b"{}")
+    except urllib.error.HTTPError as e:
+        raise HttpError(e.code) from None  # jamais l'URL : elle contient la clé
+    except (urllib.error.URLError, TimeoutError, ValueError):
+        raise HttpError(0) from None
+
+
+def _jooble_offres(brutes: dict[str, dict]) -> list[dict]:
+    offres = []
+    for oid, o in brutes.items():
+        lieu = nettoyer_html(o.get("location") or "")
+        offres.append({
+            "id": "jb-" + re.sub(r"[^A-Za-z0-9_-]", "", oid)[:60],
+            "source": "Jooble",
+            "titre": nettoyer_html(o.get("title") or ""),
+            "entreprise": nettoyer_html(o.get("company") or ""),
+            "lieu": lieu,
+            "departement": departement_depuis_lieu(lieu),
+            "date": o.get("updated") or "",
+            "url": o.get("link") or "",
+            "description": nettoyer_html(o.get("snippet") or ""),
+            "contrat": o.get("type") or "",
+            "rome": "",
+            "categorie": "",
+        })
+    return offres
 
 
 # --------------------------------------------------------------------------
@@ -397,7 +520,8 @@ def fusionner(nouvelles: list[dict], anciennes: list[dict], aujourdhui: str) -> 
     precedentes = {o["id"]: o for o in anciennes}
     vues: dict[str, dict] = {}
     doublons: set[str] = set()
-    for o in sorted(nouvelles, key=lambda x: x["source"] != "France Travail"):
+    ordre = {"France Travail": 0, "Adzuna": 1, "Jooble": 2}  # en cas de doublon, on garde la 1re source
+    for o in sorted(nouvelles, key=lambda x: ordre.get(x["source"], 9)):
         cle = cle_doublon(o["titre"], o["entreprise"])
         if cle in doublons:
             continue
@@ -436,10 +560,12 @@ def main() -> int:
             anciennes = []
 
     sources, brutes = {}, []
-    for nom, fonction in (("France Travail", fetch_france_travail), ("Adzuna", fetch_adzuna)):
+    for nom, fonction in (("Adzuna", fetch_adzuna), ("Jooble", fetch_jooble), ("France Travail", fetch_france_travail)):
         print(f"→ {nom}…")
         offres, statut = fonction()
         print(f"  {statut}")
+        if nom == "France Travail" and statut.startswith("non configurée"):
+            continue  # API fermée au public : inutile de l'afficher sur la page
         sources[nom] = statut
         brutes.extend(offres)
 
