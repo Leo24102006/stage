@@ -283,3 +283,40 @@ class Jooble(unittest.TestCase):
         self.assertEqual(offres, [])
         self.assertIn("fr.jooble.org", statut)
         self.assertNotIn("x/", statut)
+
+
+class CasReels2(unittest.TestCase):
+    def garde(self, titre, description="", categorie="it-jobs"):
+        return fetch.est_stage(titre) and fetch.est_informatique(titre, description, "", categorie)
+
+    def test_developpement_hors_info(self):
+        self.assertFalse(self.garde("Stage Assistant Développement Commercial et Evènementiel H/F"))
+        self.assertFalse(self.garde("Stage : Ingénieur(e) Agroalimentaire – Transparence de l'offre et développement produit"))
+        self.assertTrue(self.garde("Stage développement web PHP"))
+        self.assertTrue(self.garde("Stage développement d'applications mobiles"))
+        self.assertTrue(self.garde("Stage Développeuse / Développeur fullstack"))
+
+    def test_doublon_ville_en_fin(self):
+        self.assertEqual(fetch.cle_doublon("Stage Data Engineer / IA (H/F) – Lille", "IPPON Technologies"),
+                         fetch.cle_doublon("Stage Data Engineer / IA (H/F)", "Ippon Technologies"))
+
+    def test_reessai_503(self):
+        import io
+        import urllib.error
+        appels = []
+
+        class Rep:
+            status = 200
+            def read(self): return b'{"ok": 1}'
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+
+        def faux_urlopen(req, timeout=30):
+            appels.append(1)
+            if len(appels) == 1:
+                raise urllib.error.HTTPError("u", 503, "x", {}, io.BytesIO(b""))
+            return Rep()
+        with mock.patch.object(fetch.urllib.request, "urlopen", faux_urlopen), \
+                mock.patch.object(fetch.time, "sleep", lambda s: None):
+            self.assertEqual(fetch.http("GET", "https://exemple.invalid"), (200, {"ok": 1}))
+        self.assertEqual(len(appels), 2)

@@ -89,6 +89,9 @@ def http(method: str, url: str, params: dict | None = None, form: dict | None = 
             if e.code == 429 and tentative < 2:  # trop de requêtes : on attend et on réessaie
                 time.sleep(int(e.headers.get("Retry-After", "5") or 5))
                 continue
+            if e.code in (500, 502, 503, 504) and tentative < 2:  # serveur momentanément indisponible
+                time.sleep(5 * (tentative + 1))
+                continue
             raise HttpError(e.code, _code_erreur(e)) from None
         except urllib.error.URLError as e:
             if tentative < 2:
@@ -117,7 +120,7 @@ def nettoyer_html(texte: str) -> str:
 RE_STAGE = re.compile(r"\b(stage|stages|stagiaire|stagiaires|internship|intern)\b")
 RE_ALTERNANCE = re.compile(r"\b(alternance|alternant|alternante|apprenti|apprentie|apprentissage|contrat pro|contrat de professionnalisation)\b")
 RE_INFO_TITRE = re.compile(
-    r"(develop|informati|logiciel|software|\bweb\b|full ?-?stack|front ?-?end|back ?-?end|devops|"
+    r"(developpeu\w*|developer|development|developpement (web|logiciel|informatique|d.applications?|applicati\w*|mobile|front|back|full|python|java|\.net|de logiciels?|de solutions? (informatique|logicielle|numerique)\w*)|informati|logiciel|software|\bweb\b|full ?-?stack|front ?-?end|back ?-?end|devops|"
     r"\bdata\b|donnees|cyber|reseau|systemes? d.information|\bsi\b|\bit\b|cloud|python|\bjava\b|"
     r"javascript|typescript|\bphp\b|react|angular|vue\.?js|symfony|laravel|\.net|\bc#|\bc\+\+|mobile|"
     r"android|\bios\b|\bia\b|intelligence artificielle|machine learning|\bqa\b|testeur|test logiciel|"
@@ -131,7 +134,7 @@ RE_PAS_INFO_TITRE = re.compile(
     r"relation client|relationnel\w*|electronique de puissance|power electronics)"
 )
 # Version des règles de tri : si elle change, les offres gardées des jours précédents sont re-triées.
-VERSION_REGLES = 2
+VERSION_REGLES = 3
 RE_NIVEAU_BUT = re.compile(r"(\bBUT\b|\bDUT\b|\bIUT\b|[Bb]ac ?\+ ?[23]\b|[Ll]icence (pro|professionnelle|3|informatique)|[Bb]achelor)")
 RE_NIVEAU_HAUT = re.compile(r"\b(bac ?\+ ?[45]|master|m1|m2|ecole d.ingenieurs?|cycle ingenieur|eleve ingenieur|fin d.etudes)\b")
 
@@ -206,7 +209,7 @@ def est_informatique(titre: str, description: str, rome: str = "", categorie: st
     nt = norm(titre)
     if RE_PAS_INFO_TITRE.search(nt):
         sans_business = re.sub(r"business develop\w*", "", nt)
-        if not re.search(r"(develop|informati|logiciel|software|data|devops|cyber)", sans_business):
+        if not re.search(r"(developpeu\w*|developer|development|developpement (web|logiciel|informatique|d.applications?|applicati\w*|mobile|front|back|full|python|java|\.net|de logiciels?|de solutions? (informatique|logicielle|numerique)\w*)|informati|logiciel|software|data|devops|cyber)", sans_business):
             return False
     if (rome or "").upper().startswith("M18"):  # ROME M18xx = métiers de l'informatique
         return True
@@ -267,7 +270,10 @@ def departement_depuis_lieu(lieu: str) -> str:
 
 def cle_doublon(titre: str, entreprise: str) -> str:
     """« Stage : Stage - Dév Java (F/H) | Sopra-Steria » = « Stage - Dév Java | Sopra Steria »."""
-    t = re.sub(r"\b(stages?|stagiaires?|internship|h ?/ ?f|f ?/ ?h)\b", " ", norm(titre))
+    morceaux = re.split(r"\s+[-–]\s+", norm(titre))
+    if len(morceaux) > 1 and re.sub(r"[^a-z0-9]", "", morceaux[-1]) in COMMUNES:
+        morceaux = morceaux[:-1]  # « … – Lille » en fin de titre
+    t = re.sub(r"\b(stages?|stagiaires?|internship|h ?/ ?f|f ?/ ?h)\b", " ", " ".join(morceaux))
     return re.sub(r"[^a-z0-9]", "", t) + "|" + re.sub(r"[^a-z0-9]", "", norm(entreprise))
 
 
@@ -387,6 +393,8 @@ def fetch_adzuna() -> tuple[list[dict], str]:
         for code, nom in DEPARTEMENTS.items():
             if nom in zones:
                 dep = code
+        if zones and re.sub(r"[^a-z0-9]", "", norm(zones[-1])) in COMMUNES_AMBIGUES:
+            dep = ""  # ex. « Montreuil » : 62 ou 93, on ne devine pas
         if not dep and not zones:
             dep = departement_depuis_lieu(affiche)
         offres.append({
