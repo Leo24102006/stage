@@ -1,5 +1,6 @@
 {
- "mis_a_jour": "2026-11-27T13:46+00:00",
+ "mis_a_jour": "2026-11-27T13:48+00:00",
+ "version_regles": 2,
  "sources": {
   "France Travail": "non configurée (clés manquantes)",
   "Adzuna": "217 offres lues"
@@ -253,25 +254,6 @@
    "nouvelle": true
   },
   {
-   "id": "az-5973940828",
-   "source": "Adzuna",
-   "titre": "Stage : Stage - Développeur/se Java - Défense et Sécurité - Lille",
-   "entreprise": "Sopra-Steria",
-   "lieu": "Villeneuve-d'Ascq",
-   "departement": "59",
-   "date": "2026-11-21",
-   "url": "https://www.adzuna.fr/details/5973940828?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Description de l'entreprise Sopra Steria, acteur majeur de la Tech en Europe, avec 51 000 collaborateurs dans près de 30 pays, est reconnu pour ses activités de conseil, de services et solutions numériques. Il aide ses clients à mener leur transformation digitale et à obtenir des bénéfices concrets et durables. Le Groupe apporte une réponse globale aux enjeux de compétitivité des grandes entreprises et organisations, en combinant une connaissance approfondie des secteurs d’activité et des techn…",
-   "duree": {
-    "categorie": "non_precisee",
-    "extrait": ""
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
    "id": "az-5973940108",
    "source": "Adzuna",
    "titre": "Stage : Développeur .net/React (F/H) - stage",
@@ -324,27 +306,6 @@
     "extrait": ""
    },
    "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
-   "id": "az-5970991787",
-   "source": "Adzuna",
-   "titre": "Développeur .Net H/F",
-   "entreprise": "HOUSE OF ABY",
-   "lieu": "Lille",
-   "departement": "59",
-   "date": "2026-11-19",
-   "url": "https://www.adzuna.fr/details/5970991787?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Votre profil - Issu(e) d'une formation Bac 5 en Ingénierie ou Master en informatique - Minimum 4 ans d'expérience professionnelle sur un poste similaire (hors stage / alternance) - Connaissances et expériences concrètes sur le développement d'application et technologie C#, .NET - Capacité à résoudre des problèmes de manière proactive et à travailler efficacement en équipe. - Dynamisme, autonomie et rigueur dans l'exécution des tâches.",
-   "duree": {
-    "categorie": "non_precisee",
-    "extrait": ""
-   },
-   "niveau": [
-    "Vise aussi Bac+4/5"
-   ],
    "premiere_vue": "2026-11-27",
    "derniere_vue": "2026-11-27",
    "nouvelle": true
@@ -426,25 +387,6 @@
    "nouvelle": true
   },
   {
-   "id": "az-5966103003",
-   "source": "Adzuna",
-   "titre": "Front End Power Electronics Engineer",
-   "entreprise": "Amazon Web Services",
-   "lieu": "Lille",
-   "departement": "59",
-   "date": "2026-11-14",
-   "url": "https://www.adzuna.fr/details/5966103003?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Amazon Web Services is seeking a Front End Power Electronics Engineer to design the medium-voltage AC/DC front-end stage of the SST, including active-front-end rectification, PFC/THD performance and high-voltage SiC power devices. AWS Infrastructure Services owns the design, planning, delivery, and operation of all AWS global infrastructure. In other words, we’re the people who keep the cloud running. We support all AWS data centers and all of the servers, storage, networking, power, and coolin…",
-   "duree": {
-    "categorie": "non_precisee",
-    "extrait": ""
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
    "id": "az-5965600507",
    "source": "Adzuna",
    "titre": "Stage : Développeur full stack (F/H) - stage",
@@ -454,25 +396,6 @@
    "date": "2026-11-14",
    "url": "https://www.adzuna.fr/details/5965600507?utm_medium=api&utm_source=7ff1560c",
    "extrait": "VOTRE RÔLE ET VOS MISSIONS Dans le cadre de sa campagne de stage, AXA France recherche un Développeur full stack (F/H) en stage. Vous rejoindrez une squad au sein du périmètre d' \"AXA Santé Collectives\" en tant que Software Engineer spécialisé dans les technologies .Net/React. Vous intégrerez une équipe de 12 développeurs et vous serez accompagné par un tuteur expérimenté. Nous mettons un point d'honneur à offrir un encadrement de qualité, afin de vous permettre de vous développer professionnel…",
-   "duree": {
-    "categorie": "non_precisee",
-    "extrait": ""
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
-   "id": "az-5965383168",
-   "source": "Adzuna",
-   "titre": "Front End Power Electronics Engineer",
-   "entreprise": "Amazon",
-   "lieu": "Lille",
-   "departement": "59",
-   "date": "2026-11-14",
-   "url": "https://www.adzuna.fr/details/5965383168?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Description Amazon Web Services is seeking a Front End Power Electronics Engineer to design the medium-voltage AC/DC front-end stage of the SST, including active-front-end rectification, PFC/THD performance and high-voltage SiC power devices. AWS Infrastructure Services owns the design, planning, delivery, and operation of all AWS global infrastructure. In other words, we're the people who keep the cloud running. We support all AWS data centers and all of the servers, storage, networking, power…",
    "duree": {
     "categorie": "non_precisee",
     "extrait": ""
@@ -495,63 +418,6 @@
    "duree": {
     "categorie": "non_precisee",
     "extrait": ""
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
-   "id": "az-5964202528",
-   "source": "Adzuna",
-   "titre": "Front End Power Electronics Engineer",
-   "entreprise": "Amazon Data Services France SAS",
-   "lieu": "Lille",
-   "departement": "59",
-   "date": "2026-11-13",
-   "url": "https://www.adzuna.fr/details/5964202528?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Amazon Web Services is seeking a Front End Power Electronics Engineer to design the medium-voltage AC/DC front-end stage of the SST, including active-front-end rectification, PFC/THD performance and high-voltage SiC power devices. AWS Infrastructure Services owns the design, planning, delivery, and operation of all AWS global infrastructure. In other words, we’re the people who keep the cloud running. We support all AWS data centers and all of the servers, storage, networking, power, and coolin…",
-   "duree": {
-    "categorie": "non_precisee",
-    "extrait": ""
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
-   "id": "az-5963464313",
-   "source": "Adzuna",
-   "titre": "Stage - Venture Capital & Impact Investing Proparco- F/H",
-   "entreprise": "Agence Française de Développement",
-   "lieu": "Lille",
-   "departement": "59",
-   "date": "2026-11-12",
-   "url": "https://www.adzuna.fr/details/5963464313?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "STAGE - VENTURE CAPITAL & IMPACT INVESTING PROPARCO- F/H Quel sera votre rôle ? Le département Investissements de PROPARCO intervient sur des opérations de haut de bilan, en prise de participations directes ou indirectes (fonds d’investissements). Au sein de ce département, l'équipe Institutions Financières et Capital Risques recherche un(e) stagiaire Analyste pour son activité d'investissements en Venture Capital, pour une période de 6 mois, à pourvoir à partir de janvier 2027 . Cette équipe e…",
-   "duree": {
-    "categorie": "trop_longue",
-    "extrait": "pour une periode de 6 mois"
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
-   "id": "az-5961482944",
-   "source": "Adzuna",
-   "titre": "Stage : Stage Business Développement et études stratégiques F/H",
-   "entreprise": "Orange",
-   "lieu": "Villeneuve-d'Ascq",
-   "departement": "59",
-   "date": "2026-11-11",
-   "url": "https://www.adzuna.fr/details/5961482944?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Date de publication : Nov 09, 2026, 3:07PM Durée du contrat : 6 mois Envie de comprendre comment se construit le business de demain dans un secteur en pleine transformation ? Intégrez une équipe au cœur des enjeux stratégiques et de l’innovation numérique et contribuez à identifier concrètement les opportunités qui façonneront le développement de nos activités de demain. Missions Vous contribuez à identifier les opportunités de développement et à éclairer les décisions stratégiques sur le terri…",
-   "duree": {
-    "categorie": "trop_longue",
-    "extrait": "duree du contrat : 6 mois"
    },
    "niveau": [],
    "premiere_vue": "2026-11-27",
@@ -618,25 +484,6 @@
    "nouvelle": true
   },
   {
-   "id": "az-5953188206",
-   "source": "Adzuna",
-   "titre": "Stage 2027 Assistant Excellence Relationnelle, documentation et qualité IA H/F",
-   "entreprise": "Crédit Agricole Personal Finance & Mobility",
-   "lieu": "Roubaix",
-   "departement": "59",
-   "date": "2026-11-04",
-   "url": "https://www.adzuna.fr/details/5953188206?utm_medium=api&utm_source=7ff1560c",
-   "extrait": "Qui sommes nous ? Crédit Agricole Personal Finance & Mobility, filiale à 100 % du Groupe Crédit Agricole, est un leader du financement personnel et un acteur majeur de la mobilité durable en Europe. Présent dans 22 pays, le groupe accompagne chaque jour les particuliers dans la réalisation de leurs projets grâce à une large gamme de solutions de financement, de paiement, d’assurance et de mobilité. À travers ses activités il contribue également à la transition énergétique dans les domaines de …",
-   "duree": {
-    "categorie": "non_precisee",
-    "extrait": ""
-   },
-   "niveau": [],
-   "premiere_vue": "2026-11-27",
-   "derniere_vue": "2026-11-27",
-   "nouvelle": true
-  },
-  {
    "id": "az-5947703689",
    "source": "Adzuna",
    "titre": "Stage Data Engineer / IA (H/F)",
@@ -647,8 +494,8 @@
    "url": "https://www.adzuna.fr/details/5947703689?utm_medium=api&utm_source=7ff1560c",
    "extrait": "Ton stage ➡️ Le stage commencera par 2 mois de formation, afin de te familiariser avec notre environnement technique et nos outils : GCP, BigQuery, DBT, Databricks, Python, Airflow, Elementary, etc. ➡️ Tu passeras ensuite 4 mois en mise en pratique, sur des projets clients ou internes. Tu pourras notamment travailler sur l'industrialisation de plateformes Data, l'optimisation de processus ELT, la mise en place de solutions autour du Data Mesh ou encore la création de plateformes de Machine Lear…",
    "duree": {
-    "categorie": "trop_courte",
-    "extrait": "le stage commencera par 2 mois"
+    "categorie": "non_precisee",
+    "extrait": ""
    },
    "niveau": [],
    "premiere_vue": "2026-11-27",
@@ -666,8 +513,8 @@
    "url": "https://www.adzuna.fr/details/5947703722?utm_medium=api&utm_source=7ff1560c",
    "extrait": "➡️ Le stage commencera par 2 mois de formation, afin de te familiariser avec notre environnement technique et nos pratiques : Java/Kotlin, Spring Boot, framework front (Angular, React ou Vue), tests automatisés, clean code, TDD/BDD. ➡️ Tu passeras ensuite 4 mois en mise en pratique, sur des projets clients ou internes. Tu pourras notamment développer des fonctionnalités front et back, écrire et maintenir des tests unitaires et d'intégration, participer à des revues de code et contribuer aux cho…",
    "duree": {
-    "categorie": "trop_courte",
-    "extrait": "le stage commencera par 2 mois"
+    "categorie": "non_precisee",
+    "extrait": ""
    },
    "niveau": [],
    "premiere_vue": "2026-11-27",
